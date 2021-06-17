@@ -1,16 +1,15 @@
-# This is a sample Python script.
-
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from tkinter import ttk
+from tkinter import *
+import sqlite3
 
 
-# Press the green button in the gutter to run the script.
+class Main:
+    def __init__(self, window):
+        self.wind = window
+        self.wind.title('P1:G6: Proyecto Ruby')
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    window = Tk()
+    application = Main(window)
+    window.mainloop()
