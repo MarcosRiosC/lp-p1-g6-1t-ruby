@@ -53,17 +53,18 @@ tokens = (
     'SMALLER_THAN',
     'SMALLER_EQUAL',
     'VARIABLE_LOCAL', # Variables: Katiuska Marín S.
-    'VARIABLE_INSTANCIA',
-    'VARIABLE_CLASE',
+    'VARIABLE_INSTANCE',
+    'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
-    'CONSTANT'
+    'CONSTANT',
+    'RESERVED_WORD'
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
-t_AND_LOGIC = r'\&'
+t_AND_LOGIC = r'&'
 t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
-t_DIVIDE = r'\/'
+t_DIVIDE = r'/'
 t_EQUAL = r'\='
 t_EQUALITY = r'=='
 t_EQUALITY_OF_CASE = r'==='
@@ -71,10 +72,10 @@ t_EXPONENT = r'\*\*'
 t_GREATER_EQUAL = r'>='
 t_GREATER_THAN = r'>'
 t_L_PAREN = r'\('
-t_MINUS = r'\-'
-t_MODULE = r'\%'
+t_MINUS = r'-'
+t_MODULE = r'%'
 t_MULTIPLICATION = r'\*'
-t_NEGATION = r'\!'
+t_NEGATION = r'!'
 t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
 t_R_PAREN = r'\)'
@@ -97,28 +98,34 @@ def t_newline(t):
 
 
 # A regular expression que define una variable
+def t_ID(t):
+    r'[a-zA-Z_]\w+'
+    t.type = reserved.get(t.value, 'ID')  # Check for reserved words
+    return t
+
 def t_VARIABLE_LOCAL(t):
     r'^[a-z_][a-zA-Z_]+\d*'
     t.type = 'VARIABLE_LOCAL'
     return t
 
 
-def t_VARIABLE_INSTANCIA(t):
+def t_VARIABLE_INSTANCE(t):
     r'^@[a-z_][a-zA-Z_]+\d*'
-    t.type = 'VARIABLE_INSTANCIA'
+    t.type = 'VARIABLE_INSTANCE'
     return t
 
 
-def t_VARIABLE_CLASE(t):
+def t_VARIABLE_CLASS(t):
     r'^@{2}[a-z_][a-zA-Z_]+\d*'
-    t.type = 'VARIABLE_CLASE'
+    t.type = 'VARIABLE_CLASS'
     return t
 
 
 def t_CONSTANT(t):
     r'^[A-Z_]+'
-    t.type = 'VARIABLE_CLASE'
+    t.type = 'CONSTANT'
     return t
+
 
 t_ignore = ' \t'
 
