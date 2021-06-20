@@ -18,8 +18,8 @@ reserved = {
     'if' : 'IF',
     'in' : 'IN',
     'nil' : 'NIL',
-    #'not' : 'NOT',
-    #'or' : 'OR',
+    'not' : 'NOT',
+    'or' : 'OR',
     'rescue' : 'RESCUE',
     'retry' : 'RETRY',
     'return' : 'RETURN',
@@ -31,37 +31,49 @@ reserved = {
 }
 
 tokens = (
-    'COMPARISONS',
+    'AND_LOGIC',
+    'COINCIDENCE',
     'COMPOSITION',
     'DIVIDE',
-    'EQUALITY_COINCIDENCE',
+    'EQUALITY',
+    'EQUALITY_OF_CASE',
     'EXPONENT',
-    'LPAREN',
+    'GREATER_EQUAL',
+    'GREATER_THAN',
+    'L_PAREN',
     'MINUS',
     'MODULE',
     'MULTIPLICATION',
-    'NOT',
+    'NEGATION',
     'NUMBER',
-    'OR',
+    'OR_LOGIC',
     'PLUS',
-    'RPAREN'
+    'R_PAREN',
+    'SMALLER_THAN',
+    'SMALLER_EQUAL'
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
-t_COMPARISONS = r'(>=|<=|>|<)'
+t_AND_LOGIC = r'\&'
+t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
 t_DIVIDE = r'\/'
-t_EQUALITY_COINCIDENCE = r'(<=>|==|===|!=|=~|!~)'
+t_EQUALITY = r'=='
+t_EQUALITY_OF_CASE = r'==='
 t_EXPONENT = r'\ **'
 t_ignore = ' \t'
-t_LPAREN = r'\('
+t_GREATER_EQUAL = r'>='
+t_GREATER_THAN = r'>'
+t_L_PAREN = r'\('
 t_MINUS = r'\-'
 t_MODULE = r'\%'
 t_MULTIPLICATION = r'\*'
-t_NOT = r'\!'
-t_OR = r'\|'
+t_NEGATION = r'\!'
+t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
-t_RPAREN = r'\)'
+t_R_PAREN = r'\)'
+t_SMALLER_THAN = r'<'
+t_SMALLER_EQUAL = r'<='
 # A regular expression rule with some action code
 def t_NUMBER(t):
     r'\d+'
