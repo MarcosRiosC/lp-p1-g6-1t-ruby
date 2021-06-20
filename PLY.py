@@ -9,7 +9,7 @@ reserved = {
     'def' : 'DEF',
     'do' : 'DO',
     'else' : 'ELSE',
-    'elif' : 'ELIF',
+    'elsif' : 'ELIF',
     'end' : 'END',
     'ensure' : 'ENSURE',
     'false' : 'FALSE',
@@ -27,7 +27,7 @@ reserved = {
     'unless' : 'UNLESS',
     'until' : 'UNTIL',
     'when' : 'WHEN',
-    'while' : 'WHILE'
+    'while' : 'WHILE',
 }
 
 tokens = (
@@ -35,6 +35,7 @@ tokens = (
     'COINCIDENCE',
     'COMPOSITION',
     'DIVIDE',
+    'EQUAL',
     'EQUALITY',
     'EQUALITY_OF_CASE',
     'EXPONENT',
@@ -51,51 +52,86 @@ tokens = (
     'R_PAREN',
     'SMALLER_THAN',
     'SMALLER_EQUAL',
-    'VARIABLE'
+    'VARIABLE_LOCAL', # Variables: Katiuska Marín S.
+    'VARIABLE_INSTANCIA',
+    'VARIABLE_CLASE',
+    'VARIABLE_GLOBAL',
+    'CONSTANT'
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
-t_AND_LOGIC = r'&'
+t_AND_LOGIC = r'\&'
 t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
-t_DIVIDE = r'/'
+t_DIVIDE = r'\/'
+t_EQUAL = r'\='
 t_EQUALITY = r'=='
 t_EQUALITY_OF_CASE = r'==='
 t_EXPONENT = r'\*\*'
 t_GREATER_EQUAL = r'>='
 t_GREATER_THAN = r'>'
 t_L_PAREN = r'\('
-t_MINUS = r'-'
-t_MODULE = r'%'
+t_MINUS = r'\-'
+t_MODULE = r'\%'
 t_MULTIPLICATION = r'\*'
-t_NEGATION = r'!'
+t_NEGATION = r'\!'
 t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
 t_R_PAREN = r'\)'
 t_SMALLER_THAN = r'<'
 t_SMALLER_EQUAL = r'<='
 
-#Regular expression for the t_VARIABLE token
-def t_VARIABLE(t):
-    r'^([a-z]|_|@{1,2}|\$)\w+'
-    #r'^(@{1,2}|\$)?\w+$'
-    t.type = reserved.get(t.value, 'VARIABLE')  # Check for reserved words
-    return t
+
 # A regular expression rule with some action code
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
+
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 # A string containing ignored characters (spaces and tabs)
+
+
+# A regular expression que define una variable
+def t_VARIABLE_LOCAL(t):
+    r'^[a-z_][a-zA-Z_]+\d*'
+    t.type = 'VARIABLE_LOCAL'
+    return t
+
+
+def t_VARIABLE_INSTANCIA(t):
+    r'^@[a-z_][a-zA-Z_]+\d*'
+    t.type = 'VARIABLE_INSTANCIA'
+    return t
+
+
+def t_VARIABLE_CLASE(t):
+    r'^@{2}[a-z_][a-zA-Z_]+\d*'
+    t.type = 'VARIABLE_CLASE'
+    return t
+
+
+def t_CONSTANT(t):
+    r'^[A-Z_]+'
+    t.type = 'VARIABLE_CLASE'
+    return t
+
 t_ignore = ' \t'
+
+
 # Error handling rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+
+# Build the lexer
+lexer = lex.lex()
+
 
 def getTokens(lexer):
     while True:
@@ -104,11 +140,12 @@ def getTokens(lexer):
             break  # No more input
         print(tok)
 
-# Build the lexer
-lexer = lex.lex()
-linea=" "
-while linea!="":
-    linea=input(">>")
+
+linea = " "
+
+
+while linea != "":
+    linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
