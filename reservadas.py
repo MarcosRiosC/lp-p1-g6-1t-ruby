@@ -1,5 +1,5 @@
 import ply.lex as lex
-# Reserved words hash
+# List of token names.   This is always required
 reserved = {
     'and' : 'AND',
     'begin' : 'BEGIN',
@@ -31,55 +31,28 @@ reserved = {
 }
 
 tokens = (
-    'AND_LOGIC',
-    'COINCIDENCE',
-    'COMPOSITION',
-    'DIVIDE',
-    'EQUALITY',
-    'EQUALITY_OF_CASE',
-    'EXPONENT',
-    'GREATER_EQUAL',
-    'GREATER_THAN',
-    'L_PAREN',
-    'MINUS',
-    'MODULE',
-    'MULTIPLICATION',
-    'NEGATION',
     'NUMBER',
-    'OR_LOGIC',
     'PLUS',
-    'R_PAREN',
-    'SMALLER_THAN',
-    'SMALLER_EQUAL',
-    'VARIABLE'
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'LPAREN',
+    'RPAREN',
+    'MOD',
+    'ID'
 ) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
-t_AND_LOGIC = r'&'
-t_COINCIDENCE = r'=~'
-t_COMPOSITION = r'\|&'
-t_DIVIDE = r'/'
-t_EQUALITY = r'=='
-t_EQUALITY_OF_CASE = r'==='
-t_EXPONENT = r'\*\*'
-t_GREATER_EQUAL = r'>='
-t_GREATER_THAN = r'>'
-t_L_PAREN = r'\('
-t_MINUS = r'-'
-t_MODULE = r'%'
-t_MULTIPLICATION = r'\*'
-t_NEGATION = r'!'
-t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
-t_R_PAREN = r'\)'
-t_SMALLER_THAN = r'<'
-t_SMALLER_EQUAL = r'<='
-
-#Regular expression for the t_VARIABLE token
-def t_VARIABLE(t):
-    r'^([a-z]|_|@{1,2}|\$)\w+'
-    #r'^(@{1,2}|\$)?\w+$'
-    t.type = reserved.get(t.value, 'VARIABLE')  # Check for reserved words
+t_MINUS = r'-'
+t_TIMES = r'\*'
+t_DIVIDE = r'/'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_MOD = r'%'
+def t_ID(t):
+    r'[a-zA-Z_]\w+'
+    t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 # A regular expression rule with some action code
 def t_NUMBER(t):
@@ -96,14 +69,12 @@ t_ignore = ' \t'
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-
 def getTokens(lexer):
     while True:
         tok = lexer.token()
         if not tok:
             break  # No more input
         print(tok)
-
 # Build the lexer
 lexer = lex.lex()
 linea=" "
