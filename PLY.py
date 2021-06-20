@@ -9,7 +9,7 @@ reserved = {
     'def' : 'DEF',
     'do' : 'DO',
     'else' : 'ELSE',
-    'elsif' : 'ELIF',
+    'elif' : 'ELIF',
     'end' : 'END',
     'ensure' : 'ENSURE',
     'false' : 'FALSE',
@@ -27,7 +27,7 @@ reserved = {
     'unless' : 'UNLESS',
     'until' : 'UNTIL',
     'when' : 'WHEN',
-    'while' : 'WHILE',
+    'while' : 'WHILE'
 }
 
 tokens = (
@@ -60,8 +60,7 @@ t_COMPOSITION = r'\|&'
 t_DIVIDE = r'\/'
 t_EQUALITY = r'=='
 t_EQUALITY_OF_CASE = r'==='
-t_EXPONENT = r'\ **'
-t_ignore = ' \t'
+t_EXPONENT = r'\*\*'
 t_GREATER_EQUAL = r'>='
 t_GREATER_THAN = r'>'
 t_L_PAREN = r'\('
@@ -84,6 +83,7 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 # A string containing ignored characters (spaces and tabs)
+t_ignore = ' \t'
 # Error handling rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
