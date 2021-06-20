@@ -99,9 +99,10 @@ def t_newline(t):
 
 # A regular expression que define una variable
 def t_ID(t):
-    r'[a-zA-Z_]\w+'
+    r'[a-z]\w+'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
+
 
 def t_VARIABLE_LOCAL(t):
     r'^[a-z_][a-zA-Z_]+\d*'
