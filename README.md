@@ -1,5 +1,6 @@
 # lp-p1-g6-1t-ruby
 
+
 ## Ejecutando pruebas ⚙️
 _Para validar las palabras dentro de una expresión (suma, resta, etc) se sugiere no dejar espacios_
 
@@ -15,3 +16,8 @@ De esta forma no validará las palabras que intervienen
 ```
 var1 = var2 + var3
 ```
+## Integrantes ✒️
+
+* **Katiuska Marín** - 
+* **Marcos Ríos** - 
+* **Aaron Reyes** -
