@@ -1,5 +1,6 @@
 import ply.lex as lex
 # Reserved words hash
+# Aarón reyes - palabras reservadas
 reserved = {
     'and' : 'AND',
     'begin' : 'BEGIN',
@@ -30,6 +31,8 @@ reserved = {
     'while' : 'WHILE',
 }
 
+
+# start Aarón Reyes - tokens
 tokens = (
     'AND_LOGIC',
     'COINCIDENCE',
@@ -52,15 +55,24 @@ tokens = (
     'R_PAREN',
     'SMALLER_THAN',
     'SMALLER_EQUAL',
-    'VARIABLE_LOCAL', # Variables: Katiuska Marín S.
+    'QUOTATION_MARK',
+    'WRENCH_L',
+    'WRENCH_R',
+    'COMMA',
+    'DOUBLE_QUOTE',
+    #end Aarón Reyes - tokens
+    # start Katiuska Marín S.
+    'VARIABLE_LOCAL',
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
     'CONSTANT',
-    'RESERVED_WORD'
+    # end Katiuska Marín S.
 ) + tuple(reserved.values())
 
+
 # Regular expression rules for simple tokens
+# start Aarón Reyes - ERtokens
 t_AND_LOGIC = r'&'
 t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
@@ -81,64 +93,61 @@ t_PLUS = r'\+'
 t_R_PAREN = r'\)'
 t_SMALLER_THAN = r'<'
 t_SMALLER_EQUAL = r'<='
+t_QUOTATION_MARK = r'\''
+t_WRENCH_L = r'\{'
+t_WRENCH_R = r'\}'
+t_COMMA = r','
+t_DOUBLE_QUOTE = r'"'
+t_ignore = ' \t'
 
-
-# A regular expression rule with some action code
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
+# end Aarón Reyes - ERtokens
 
 
+# Expreciones que definen una variable
+# start Katiuska Marín S.
+def t_VARIABLE_LOCAL(t):
+    r'[a-z_][a-zA-Z_]+\d*'
+    t.type = reserved.get(t.value, 'VARIABLE_LOCAL')
+    return t
+
+def t_VARIABLE_INSTANCE(t):
+    r'@[a-z_][a-zA-Z_]+\d*'
+    t.type = reserved.get(t.value, 'VARIABLE_INSTANCE')
+    return t
+
+def t_VARIABLE_CLASS(t):
+    r'@{2}[a-z_][a-zA-Z_]+\d*'
+    t.type = reserved.get(t.value, 'VARIABLE_CLASS')
+    return t
+
+def t_CONSTANT(t):
+    r'[A-Z_]+'
+    t.type = reserved.get(t.value, 'CONSTANT')
+    return t
+
+def t_VARIABLE_GLOBAL(t):
+    r'\$[a-z_][a-zA-Z_]+\d*'
+    t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
+    return t
+# end Katiuska Marín S.
+
+# De aquí en adelante el código fue reciclado de la práctica en clases.
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
-# A string containing ignored characters (spaces and tabs)
-
-
-# A regular expression que define una variable
-def t_ID(t):
-    r'[a-zA-Z_]\w+'
-    t.type = reserved.get(t.value, 'ID')  # Check for reserved words
-    return t
-
-def t_VARIABLE_LOCAL(t):
-    r'^[a-z_][a-zA-Z_]+\d*'
-    t.type = 'VARIABLE_LOCAL'
-    return t
-
-
-def t_VARIABLE_INSTANCE(t):
-    r'^@[a-z_][a-zA-Z_]+\d*'
-    t.type = 'VARIABLE_INSTANCE'
-    return t
-
-
-def t_VARIABLE_CLASS(t):
-    r'^@{2}[a-z_][a-zA-Z_]+\d*'
-    t.type = 'VARIABLE_CLASS'
-    return t
-
-
-def t_CONSTANT(t):
-    r'^[A-Z_]+'
-    t.type = 'CONSTANT'
-    return t
-
-
-t_ignore = ' \t'
-
 
 # Error handling rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-
 # Build the lexer
 lexer = lex.lex()
-
 
 def getTokens(lexer):
     while True:
@@ -147,9 +156,7 @@ def getTokens(lexer):
             break  # No more input
         print(tok)
 
-
 linea = " "
-
 
 while linea != "":
     linea = input(">>")
