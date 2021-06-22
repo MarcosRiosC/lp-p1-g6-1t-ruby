@@ -1,20 +1,20 @@
-# lp-p1-g6-1t-ruby
+# Proyecto de Lenguajes de Programación
 
 
-## Ejecutando pruebas ⚙️
-_Para validar las palabras dentro de una expresión (suma, resta, etc) se sugiere no dejar espacios_
+## Lenguaje Ruby ⚙️
+_Para validar las palabras dentro de una expresión solo basta con escribirla por consola_
 
-Esta es la forma correcta
-```
-var1=var2+var3
-```
-```
-var1 = var2+var3
-```
-
-De esta forma no validará las palabras que intervienen
+Ejemplo
 ```
 var1 = var2 + var3
+```
+```
+arreglo = {'gato', 15, @var2, "yarleny"}
+```
+
+A continuación el programa mostrará que a qué tipo de dato pertenece cada token
+```
+
 ```
 ## Integrantes ✒️
 
