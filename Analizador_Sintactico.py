@@ -90,7 +90,7 @@ def p_print_vac(p):
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
 def p_print_str(p):
-    'print : PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK '''
+    'print : PUTS STRING'
 
 def p_estructura(p):
     '''estructura : estructuraCondicional
