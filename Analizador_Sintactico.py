@@ -89,6 +89,9 @@ def p_print_vac(p):
 #AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
+def p_print_str(p):
+    'print : PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK '''
+
 def p_estructura(p):
     '''estructura : estructuraCondicional
                     | estructuraIterativa'''
