@@ -1,1 +1,2003 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    BEGIN
+    BREAK
+    CASE
+    CLASS
+    COINCIDENCE
+    COMPOSITION
+    DO
+    DOUBLE_QUOTE
+    ELIF
+    ELSE
+    ENSURE
+    FALSE
+    FOR
+    IF
+    IN
+    NEGATION
+    NIL
+    NOT
+    OR
+    QUOTATION_MARK
+    RESCUE
+    RETRY
+    RETURN
+    THEN
+    TRUE
+    UNLESS
+    UNTIL
+    WHEN
+    WHILE
+    WRENCH_L
+    WRENCH_R
+
+Grammar
+
+Rule 0     S' -> sentencia
+Rule 1     sentencia -> funcion
+Rule 2     sentencia -> declaracion
+Rule 3     sentencia -> expresion
+Rule 4     sentencia -> print
+Rule 5     funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END
+Rule 6     parametros -> VARIABLE_LOCAL
+Rule 7     parametros -> VARIABLE_LOCAL COMMA parametros
+Rule 8     cuerpo -> declaracion
+Rule 9     cuerpo -> declaracion cuerpo
+Rule 10    cuerpo -> print
+Rule 11    cuerpo -> print cuerpo
+Rule 12    cuerpo -> expresion
+Rule 13    cuerpo -> expresion cuerpo
+Rule 14    declaracion -> variable EQUAL expresion
+Rule 15    variable -> VARIABLE_LOCAL
+Rule 16    variable -> VARIABLE_INSTANCE
+Rule 17    variable -> VARIABLE_CLASS
+Rule 18    variable -> VARIABLE_GLOBAL
+Rule 19    variable -> CONSTANT
+Rule 20    expresion -> expresion PLUS term
+Rule 21    expresion -> expresion MINUS term
+Rule 22    expresion -> expresion MULTIPLICATION term
+Rule 23    expresion -> expresion DIVIDE term
+Rule 24    expresion -> expresion EXPONENT term
+Rule 25    expresion -> expresion MODULE term
+Rule 26    expresion -> expresion AND_LOGIC term
+Rule 27    expresion -> expresion OR_LOGIC term
+Rule 28    expresion -> expresion EQUALITY term
+Rule 29    expresion -> expresion EQUALITY_OF_CASE term
+Rule 30    expresion -> expresion GREATER_EQUAL term
+Rule 31    expresion -> expresion GREATER_THAN term
+Rule 32    expresion -> expresion SMALLER_THAN term
+Rule 33    expresion -> expresion SMALLER_EQUAL term
+Rule 34    expresion -> term
+Rule 35    term -> NUMBER
+Rule 36    term -> variable
+Rule 37    term -> L_PAREN expresion R_PAREN
+Rule 38    print -> PUTS L_PAREN expresion R_PAREN
+Rule 39    print -> PUTS L_PAREN variable R_PAREN
+Rule 40    print -> PUTS L_PAREN R_PAREN
+
+Terminals, with rules where they appear
+
+AND                  : 
+AND_LOGIC            : 26
+BEGIN                : 
+BREAK                : 
+CASE                 : 
+CLASS                : 
+COINCIDENCE          : 
+COMMA                : 7
+COMPOSITION          : 
+CONSTANT             : 19
+DEF                  : 5
+DIVIDE               : 23
+DO                   : 
+DOUBLE_QUOTE         : 
+ELIF                 : 
+ELSE                 : 
+END                  : 5
+ENSURE               : 
+EQUAL                : 14
+EQUALITY             : 28
+EQUALITY_OF_CASE     : 29
+EXPONENT             : 24
+FALSE                : 
+FOR                  : 
+GREATER_EQUAL        : 30
+GREATER_THAN         : 31
+IF                   : 
+IN                   : 
+L_PAREN              : 5 37 38 39 40
+MINUS                : 21
+MODULE               : 25
+MULTIPLICATION       : 22
+NEGATION             : 
+NIL                  : 
+NOT                  : 
+NUMBER               : 35
+OR                   : 
+OR_LOGIC             : 27
+PLUS                 : 20
+PUTS                 : 38 39 40
+QUOTATION_MARK       : 
+RESCUE               : 
+RETRY                : 
+RETURN               : 
+R_PAREN              : 5 37 38 39 40
+SMALLER_EQUAL        : 33
+SMALLER_THAN         : 32
+THEN                 : 
+TRUE                 : 
+UNLESS               : 
+UNTIL                : 
+VARIABLE_CLASS       : 17
+VARIABLE_GLOBAL      : 18
+VARIABLE_INSTANCE    : 16
+VARIABLE_LOCAL       : 5 6 7 15
+WHEN                 : 
+WHILE                : 
+WRENCH_L             : 
+WRENCH_R             : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+cuerpo               : 5 9 11 13
+declaracion          : 2 8 9
+expresion            : 3 12 13 14 20 21 22 23 24 25 26 27 28 29 30 31 32 33 37 38
+funcion              : 1
+parametros           : 5 7
+print                : 4 10 11
+sentencia            : 0
+term                 : 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+variable             : 14 36 39
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentencia
+    (1) sentencia -> . funcion
+    (2) sentencia -> . declaracion
+    (3) sentencia -> . expresion
+    (4) sentencia -> . print
+    (5) funcion -> . DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END
+    (14) declaracion -> . variable EQUAL expresion
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (38) print -> . PUTS L_PAREN expresion R_PAREN
+    (39) print -> . PUTS L_PAREN variable R_PAREN
+    (40) print -> . PUTS L_PAREN R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    DEF             shift and go to state 6
+    PUTS            shift and go to state 11
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    sentencia                      shift and go to state 1
+    funcion                        shift and go to state 2
+    declaracion                    shift and go to state 3
+    expresion                      shift and go to state 4
+    print                          shift and go to state 5
+    variable                       shift and go to state 9
+    term                           shift and go to state 10
+
+state 1
+
+    (0) S' -> sentencia .
+
+
+
+state 2
+
+    (1) sentencia -> funcion .
+
+    $end            reduce using rule 1 (sentencia -> funcion .)
+
+
+state 3
+
+    (2) sentencia -> declaracion .
+
+    $end            reduce using rule 2 (sentencia -> declaracion .)
+
+
+state 4
+
+    (3) sentencia -> expresion .
+    (20) expresion -> expresion . PLUS term
+    (21) expresion -> expresion . MINUS term
+    (22) expresion -> expresion . MULTIPLICATION term
+    (23) expresion -> expresion . DIVIDE term
+    (24) expresion -> expresion . EXPONENT term
+    (25) expresion -> expresion . MODULE term
+    (26) expresion -> expresion . AND_LOGIC term
+    (27) expresion -> expresion . OR_LOGIC term
+    (28) expresion -> expresion . EQUALITY term
+    (29) expresion -> expresion . EQUALITY_OF_CASE term
+    (30) expresion -> expresion . GREATER_EQUAL term
+    (31) expresion -> expresion . GREATER_THAN term
+    (32) expresion -> expresion . SMALLER_THAN term
+    (33) expresion -> expresion . SMALLER_EQUAL term
+
+    $end            reduce using rule 3 (sentencia -> expresion .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    MULTIPLICATION  shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENT        shift and go to state 21
+    MODULE          shift and go to state 22
+    AND_LOGIC       shift and go to state 23
+    OR_LOGIC        shift and go to state 24
+    EQUALITY        shift and go to state 25
+    EQUALITY_OF_CASE shift and go to state 26
+    GREATER_EQUAL   shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    SMALLER_THAN    shift and go to state 29
+    SMALLER_EQUAL   shift and go to state 30
+
+
+state 5
+
+    (4) sentencia -> print .
+
+    $end            reduce using rule 4 (sentencia -> print .)
+
+
+state 6
+
+    (5) funcion -> DEF . VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END
+
+    VARIABLE_LOCAL  shift and go to state 31
+
+
+state 7
+
+    (15) variable -> VARIABLE_LOCAL .
+
+    EQUAL           reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    PLUS            reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    MINUS           reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    MULTIPLICATION  reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    DIVIDE          reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    EXPONENT        reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    MODULE          reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    AND_LOGIC       reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    OR_LOGIC        reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    EQUALITY        reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    EQUALITY_OF_CASE reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    GREATER_EQUAL   reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    GREATER_THAN    reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    SMALLER_THAN    reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    SMALLER_EQUAL   reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    $end            reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    R_PAREN         reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    PUTS            reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    VARIABLE_LOCAL  reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    VARIABLE_INSTANCE reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    VARIABLE_CLASS  reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    VARIABLE_GLOBAL reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    CONSTANT        reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    NUMBER          reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    L_PAREN         reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+    END             reduce using rule 15 (variable -> VARIABLE_LOCAL .)
+
+
+state 8
+
+    (37) term -> L_PAREN . expresion R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    expresion                      shift and go to state 32
+    term                           shift and go to state 10
+    variable                       shift and go to state 33
+
+state 9
+
+    (14) declaracion -> variable . EQUAL expresion
+    (36) term -> variable .
+
+    EQUAL           shift and go to state 34
+    PLUS            reduce using rule 36 (term -> variable .)
+    MINUS           reduce using rule 36 (term -> variable .)
+    MULTIPLICATION  reduce using rule 36 (term -> variable .)
+    DIVIDE          reduce using rule 36 (term -> variable .)
+    EXPONENT        reduce using rule 36 (term -> variable .)
+    MODULE          reduce using rule 36 (term -> variable .)
+    AND_LOGIC       reduce using rule 36 (term -> variable .)
+    OR_LOGIC        reduce using rule 36 (term -> variable .)
+    EQUALITY        reduce using rule 36 (term -> variable .)
+    EQUALITY_OF_CASE reduce using rule 36 (term -> variable .)
+    GREATER_EQUAL   reduce using rule 36 (term -> variable .)
+    GREATER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_EQUAL   reduce using rule 36 (term -> variable .)
+    $end            reduce using rule 36 (term -> variable .)
+    PUTS            reduce using rule 36 (term -> variable .)
+    VARIABLE_LOCAL  reduce using rule 36 (term -> variable .)
+    VARIABLE_INSTANCE reduce using rule 36 (term -> variable .)
+    VARIABLE_CLASS  reduce using rule 36 (term -> variable .)
+    VARIABLE_GLOBAL reduce using rule 36 (term -> variable .)
+    CONSTANT        reduce using rule 36 (term -> variable .)
+    NUMBER          reduce using rule 36 (term -> variable .)
+    L_PAREN         reduce using rule 36 (term -> variable .)
+    END             reduce using rule 36 (term -> variable .)
+
+
+state 10
+
+    (34) expresion -> term .
+
+    PLUS            reduce using rule 34 (expresion -> term .)
+    MINUS           reduce using rule 34 (expresion -> term .)
+    MULTIPLICATION  reduce using rule 34 (expresion -> term .)
+    DIVIDE          reduce using rule 34 (expresion -> term .)
+    EXPONENT        reduce using rule 34 (expresion -> term .)
+    MODULE          reduce using rule 34 (expresion -> term .)
+    AND_LOGIC       reduce using rule 34 (expresion -> term .)
+    OR_LOGIC        reduce using rule 34 (expresion -> term .)
+    EQUALITY        reduce using rule 34 (expresion -> term .)
+    EQUALITY_OF_CASE reduce using rule 34 (expresion -> term .)
+    GREATER_EQUAL   reduce using rule 34 (expresion -> term .)
+    GREATER_THAN    reduce using rule 34 (expresion -> term .)
+    SMALLER_THAN    reduce using rule 34 (expresion -> term .)
+    SMALLER_EQUAL   reduce using rule 34 (expresion -> term .)
+    $end            reduce using rule 34 (expresion -> term .)
+    R_PAREN         reduce using rule 34 (expresion -> term .)
+    PUTS            reduce using rule 34 (expresion -> term .)
+    VARIABLE_LOCAL  reduce using rule 34 (expresion -> term .)
+    VARIABLE_INSTANCE reduce using rule 34 (expresion -> term .)
+    VARIABLE_CLASS  reduce using rule 34 (expresion -> term .)
+    VARIABLE_GLOBAL reduce using rule 34 (expresion -> term .)
+    CONSTANT        reduce using rule 34 (expresion -> term .)
+    NUMBER          reduce using rule 34 (expresion -> term .)
+    L_PAREN         reduce using rule 34 (expresion -> term .)
+    END             reduce using rule 34 (expresion -> term .)
+
+
+state 11
+
+    (38) print -> PUTS . L_PAREN expresion R_PAREN
+    (39) print -> PUTS . L_PAREN variable R_PAREN
+    (40) print -> PUTS . L_PAREN R_PAREN
+
+    L_PAREN         shift and go to state 35
+
+
+state 12
+
+    (16) variable -> VARIABLE_INSTANCE .
+
+    EQUAL           reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    PLUS            reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    MINUS           reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    MULTIPLICATION  reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    DIVIDE          reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    EXPONENT        reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    MODULE          reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    AND_LOGIC       reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    OR_LOGIC        reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    EQUALITY        reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    EQUALITY_OF_CASE reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    GREATER_EQUAL   reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    GREATER_THAN    reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    SMALLER_THAN    reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    SMALLER_EQUAL   reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    $end            reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    R_PAREN         reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    PUTS            reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    VARIABLE_LOCAL  reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    VARIABLE_INSTANCE reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    VARIABLE_CLASS  reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    VARIABLE_GLOBAL reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    CONSTANT        reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    NUMBER          reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    L_PAREN         reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+    END             reduce using rule 16 (variable -> VARIABLE_INSTANCE .)
+
+
+state 13
+
+    (17) variable -> VARIABLE_CLASS .
+
+    EQUAL           reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    PLUS            reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    MINUS           reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    MULTIPLICATION  reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    DIVIDE          reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    EXPONENT        reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    MODULE          reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    AND_LOGIC       reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    OR_LOGIC        reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    EQUALITY        reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    EQUALITY_OF_CASE reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    GREATER_EQUAL   reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    GREATER_THAN    reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    SMALLER_THAN    reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    SMALLER_EQUAL   reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    $end            reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    R_PAREN         reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    PUTS            reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    VARIABLE_LOCAL  reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    VARIABLE_INSTANCE reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    VARIABLE_CLASS  reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    VARIABLE_GLOBAL reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    CONSTANT        reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    NUMBER          reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    L_PAREN         reduce using rule 17 (variable -> VARIABLE_CLASS .)
+    END             reduce using rule 17 (variable -> VARIABLE_CLASS .)
+
+
+state 14
+
+    (18) variable -> VARIABLE_GLOBAL .
+
+    EQUAL           reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    PLUS            reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    MINUS           reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    MULTIPLICATION  reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    DIVIDE          reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    EXPONENT        reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    MODULE          reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    AND_LOGIC       reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    OR_LOGIC        reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    EQUALITY        reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    EQUALITY_OF_CASE reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    GREATER_EQUAL   reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    GREATER_THAN    reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    SMALLER_THAN    reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    SMALLER_EQUAL   reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    $end            reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    R_PAREN         reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    PUTS            reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    VARIABLE_LOCAL  reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    VARIABLE_INSTANCE reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    VARIABLE_CLASS  reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    VARIABLE_GLOBAL reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    CONSTANT        reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    NUMBER          reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    L_PAREN         reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+    END             reduce using rule 18 (variable -> VARIABLE_GLOBAL .)
+
+
+state 15
+
+    (19) variable -> CONSTANT .
+
+    EQUAL           reduce using rule 19 (variable -> CONSTANT .)
+    PLUS            reduce using rule 19 (variable -> CONSTANT .)
+    MINUS           reduce using rule 19 (variable -> CONSTANT .)
+    MULTIPLICATION  reduce using rule 19 (variable -> CONSTANT .)
+    DIVIDE          reduce using rule 19 (variable -> CONSTANT .)
+    EXPONENT        reduce using rule 19 (variable -> CONSTANT .)
+    MODULE          reduce using rule 19 (variable -> CONSTANT .)
+    AND_LOGIC       reduce using rule 19 (variable -> CONSTANT .)
+    OR_LOGIC        reduce using rule 19 (variable -> CONSTANT .)
+    EQUALITY        reduce using rule 19 (variable -> CONSTANT .)
+    EQUALITY_OF_CASE reduce using rule 19 (variable -> CONSTANT .)
+    GREATER_EQUAL   reduce using rule 19 (variable -> CONSTANT .)
+    GREATER_THAN    reduce using rule 19 (variable -> CONSTANT .)
+    SMALLER_THAN    reduce using rule 19 (variable -> CONSTANT .)
+    SMALLER_EQUAL   reduce using rule 19 (variable -> CONSTANT .)
+    $end            reduce using rule 19 (variable -> CONSTANT .)
+    R_PAREN         reduce using rule 19 (variable -> CONSTANT .)
+    PUTS            reduce using rule 19 (variable -> CONSTANT .)
+    VARIABLE_LOCAL  reduce using rule 19 (variable -> CONSTANT .)
+    VARIABLE_INSTANCE reduce using rule 19 (variable -> CONSTANT .)
+    VARIABLE_CLASS  reduce using rule 19 (variable -> CONSTANT .)
+    VARIABLE_GLOBAL reduce using rule 19 (variable -> CONSTANT .)
+    CONSTANT        reduce using rule 19 (variable -> CONSTANT .)
+    NUMBER          reduce using rule 19 (variable -> CONSTANT .)
+    L_PAREN         reduce using rule 19 (variable -> CONSTANT .)
+    END             reduce using rule 19 (variable -> CONSTANT .)
+
+
+state 16
+
+    (35) term -> NUMBER .
+
+    PLUS            reduce using rule 35 (term -> NUMBER .)
+    MINUS           reduce using rule 35 (term -> NUMBER .)
+    MULTIPLICATION  reduce using rule 35 (term -> NUMBER .)
+    DIVIDE          reduce using rule 35 (term -> NUMBER .)
+    EXPONENT        reduce using rule 35 (term -> NUMBER .)
+    MODULE          reduce using rule 35 (term -> NUMBER .)
+    AND_LOGIC       reduce using rule 35 (term -> NUMBER .)
+    OR_LOGIC        reduce using rule 35 (term -> NUMBER .)
+    EQUALITY        reduce using rule 35 (term -> NUMBER .)
+    EQUALITY_OF_CASE reduce using rule 35 (term -> NUMBER .)
+    GREATER_EQUAL   reduce using rule 35 (term -> NUMBER .)
+    GREATER_THAN    reduce using rule 35 (term -> NUMBER .)
+    SMALLER_THAN    reduce using rule 35 (term -> NUMBER .)
+    SMALLER_EQUAL   reduce using rule 35 (term -> NUMBER .)
+    $end            reduce using rule 35 (term -> NUMBER .)
+    R_PAREN         reduce using rule 35 (term -> NUMBER .)
+    PUTS            reduce using rule 35 (term -> NUMBER .)
+    VARIABLE_LOCAL  reduce using rule 35 (term -> NUMBER .)
+    VARIABLE_INSTANCE reduce using rule 35 (term -> NUMBER .)
+    VARIABLE_CLASS  reduce using rule 35 (term -> NUMBER .)
+    VARIABLE_GLOBAL reduce using rule 35 (term -> NUMBER .)
+    CONSTANT        reduce using rule 35 (term -> NUMBER .)
+    NUMBER          reduce using rule 35 (term -> NUMBER .)
+    L_PAREN         reduce using rule 35 (term -> NUMBER .)
+    END             reduce using rule 35 (term -> NUMBER .)
+
+
+state 17
+
+    (20) expresion -> expresion PLUS . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 36
+    variable                       shift and go to state 33
+
+state 18
+
+    (21) expresion -> expresion MINUS . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 37
+    variable                       shift and go to state 33
+
+state 19
+
+    (22) expresion -> expresion MULTIPLICATION . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 38
+    variable                       shift and go to state 33
+
+state 20
+
+    (23) expresion -> expresion DIVIDE . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 39
+    variable                       shift and go to state 33
+
+state 21
+
+    (24) expresion -> expresion EXPONENT . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 40
+    variable                       shift and go to state 33
+
+state 22
+
+    (25) expresion -> expresion MODULE . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 41
+    variable                       shift and go to state 33
+
+state 23
+
+    (26) expresion -> expresion AND_LOGIC . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 42
+    variable                       shift and go to state 33
+
+state 24
+
+    (27) expresion -> expresion OR_LOGIC . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 43
+    variable                       shift and go to state 33
+
+state 25
+
+    (28) expresion -> expresion EQUALITY . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 44
+    variable                       shift and go to state 33
+
+state 26
+
+    (29) expresion -> expresion EQUALITY_OF_CASE . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 45
+    variable                       shift and go to state 33
+
+state 27
+
+    (30) expresion -> expresion GREATER_EQUAL . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 46
+    variable                       shift and go to state 33
+
+state 28
+
+    (31) expresion -> expresion GREATER_THAN . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 47
+    variable                       shift and go to state 33
+
+state 29
+
+    (32) expresion -> expresion SMALLER_THAN . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 48
+    variable                       shift and go to state 33
+
+state 30
+
+    (33) expresion -> expresion SMALLER_EQUAL . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    term                           shift and go to state 49
+    variable                       shift and go to state 33
+
+state 31
+
+    (5) funcion -> DEF VARIABLE_LOCAL . L_PAREN parametros R_PAREN cuerpo END
+
+    L_PAREN         shift and go to state 50
+
+
+state 32
+
+    (37) term -> L_PAREN expresion . R_PAREN
+    (20) expresion -> expresion . PLUS term
+    (21) expresion -> expresion . MINUS term
+    (22) expresion -> expresion . MULTIPLICATION term
+    (23) expresion -> expresion . DIVIDE term
+    (24) expresion -> expresion . EXPONENT term
+    (25) expresion -> expresion . MODULE term
+    (26) expresion -> expresion . AND_LOGIC term
+    (27) expresion -> expresion . OR_LOGIC term
+    (28) expresion -> expresion . EQUALITY term
+    (29) expresion -> expresion . EQUALITY_OF_CASE term
+    (30) expresion -> expresion . GREATER_EQUAL term
+    (31) expresion -> expresion . GREATER_THAN term
+    (32) expresion -> expresion . SMALLER_THAN term
+    (33) expresion -> expresion . SMALLER_EQUAL term
+
+    R_PAREN         shift and go to state 51
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    MULTIPLICATION  shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENT        shift and go to state 21
+    MODULE          shift and go to state 22
+    AND_LOGIC       shift and go to state 23
+    OR_LOGIC        shift and go to state 24
+    EQUALITY        shift and go to state 25
+    EQUALITY_OF_CASE shift and go to state 26
+    GREATER_EQUAL   shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    SMALLER_THAN    shift and go to state 29
+    SMALLER_EQUAL   shift and go to state 30
+
+
+state 33
+
+    (36) term -> variable .
+
+    R_PAREN         reduce using rule 36 (term -> variable .)
+    PLUS            reduce using rule 36 (term -> variable .)
+    MINUS           reduce using rule 36 (term -> variable .)
+    MULTIPLICATION  reduce using rule 36 (term -> variable .)
+    DIVIDE          reduce using rule 36 (term -> variable .)
+    EXPONENT        reduce using rule 36 (term -> variable .)
+    MODULE          reduce using rule 36 (term -> variable .)
+    AND_LOGIC       reduce using rule 36 (term -> variable .)
+    OR_LOGIC        reduce using rule 36 (term -> variable .)
+    EQUALITY        reduce using rule 36 (term -> variable .)
+    EQUALITY_OF_CASE reduce using rule 36 (term -> variable .)
+    GREATER_EQUAL   reduce using rule 36 (term -> variable .)
+    GREATER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_EQUAL   reduce using rule 36 (term -> variable .)
+    $end            reduce using rule 36 (term -> variable .)
+    PUTS            reduce using rule 36 (term -> variable .)
+    VARIABLE_LOCAL  reduce using rule 36 (term -> variable .)
+    VARIABLE_INSTANCE reduce using rule 36 (term -> variable .)
+    VARIABLE_CLASS  reduce using rule 36 (term -> variable .)
+    VARIABLE_GLOBAL reduce using rule 36 (term -> variable .)
+    CONSTANT        reduce using rule 36 (term -> variable .)
+    NUMBER          reduce using rule 36 (term -> variable .)
+    L_PAREN         reduce using rule 36 (term -> variable .)
+    END             reduce using rule 36 (term -> variable .)
+
+
+state 34
+
+    (14) declaracion -> variable EQUAL . expresion
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+
+    variable                       shift and go to state 33
+    expresion                      shift and go to state 52
+    term                           shift and go to state 10
+
+state 35
+
+    (38) print -> PUTS L_PAREN . expresion R_PAREN
+    (39) print -> PUTS L_PAREN . variable R_PAREN
+    (40) print -> PUTS L_PAREN . R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    R_PAREN         shift and go to state 54
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    expresion                      shift and go to state 53
+    variable                       shift and go to state 55
+    term                           shift and go to state 10
+
+state 36
+
+    (20) expresion -> expresion PLUS term .
+
+    PLUS            reduce using rule 20 (expresion -> expresion PLUS term .)
+    MINUS           reduce using rule 20 (expresion -> expresion PLUS term .)
+    MULTIPLICATION  reduce using rule 20 (expresion -> expresion PLUS term .)
+    DIVIDE          reduce using rule 20 (expresion -> expresion PLUS term .)
+    EXPONENT        reduce using rule 20 (expresion -> expresion PLUS term .)
+    MODULE          reduce using rule 20 (expresion -> expresion PLUS term .)
+    AND_LOGIC       reduce using rule 20 (expresion -> expresion PLUS term .)
+    OR_LOGIC        reduce using rule 20 (expresion -> expresion PLUS term .)
+    EQUALITY        reduce using rule 20 (expresion -> expresion PLUS term .)
+    EQUALITY_OF_CASE reduce using rule 20 (expresion -> expresion PLUS term .)
+    GREATER_EQUAL   reduce using rule 20 (expresion -> expresion PLUS term .)
+    GREATER_THAN    reduce using rule 20 (expresion -> expresion PLUS term .)
+    SMALLER_THAN    reduce using rule 20 (expresion -> expresion PLUS term .)
+    SMALLER_EQUAL   reduce using rule 20 (expresion -> expresion PLUS term .)
+    $end            reduce using rule 20 (expresion -> expresion PLUS term .)
+    R_PAREN         reduce using rule 20 (expresion -> expresion PLUS term .)
+    PUTS            reduce using rule 20 (expresion -> expresion PLUS term .)
+    VARIABLE_LOCAL  reduce using rule 20 (expresion -> expresion PLUS term .)
+    VARIABLE_INSTANCE reduce using rule 20 (expresion -> expresion PLUS term .)
+    VARIABLE_CLASS  reduce using rule 20 (expresion -> expresion PLUS term .)
+    VARIABLE_GLOBAL reduce using rule 20 (expresion -> expresion PLUS term .)
+    CONSTANT        reduce using rule 20 (expresion -> expresion PLUS term .)
+    NUMBER          reduce using rule 20 (expresion -> expresion PLUS term .)
+    L_PAREN         reduce using rule 20 (expresion -> expresion PLUS term .)
+    END             reduce using rule 20 (expresion -> expresion PLUS term .)
+
+
+state 37
+
+    (21) expresion -> expresion MINUS term .
+
+    PLUS            reduce using rule 21 (expresion -> expresion MINUS term .)
+    MINUS           reduce using rule 21 (expresion -> expresion MINUS term .)
+    MULTIPLICATION  reduce using rule 21 (expresion -> expresion MINUS term .)
+    DIVIDE          reduce using rule 21 (expresion -> expresion MINUS term .)
+    EXPONENT        reduce using rule 21 (expresion -> expresion MINUS term .)
+    MODULE          reduce using rule 21 (expresion -> expresion MINUS term .)
+    AND_LOGIC       reduce using rule 21 (expresion -> expresion MINUS term .)
+    OR_LOGIC        reduce using rule 21 (expresion -> expresion MINUS term .)
+    EQUALITY        reduce using rule 21 (expresion -> expresion MINUS term .)
+    EQUALITY_OF_CASE reduce using rule 21 (expresion -> expresion MINUS term .)
+    GREATER_EQUAL   reduce using rule 21 (expresion -> expresion MINUS term .)
+    GREATER_THAN    reduce using rule 21 (expresion -> expresion MINUS term .)
+    SMALLER_THAN    reduce using rule 21 (expresion -> expresion MINUS term .)
+    SMALLER_EQUAL   reduce using rule 21 (expresion -> expresion MINUS term .)
+    $end            reduce using rule 21 (expresion -> expresion MINUS term .)
+    R_PAREN         reduce using rule 21 (expresion -> expresion MINUS term .)
+    PUTS            reduce using rule 21 (expresion -> expresion MINUS term .)
+    VARIABLE_LOCAL  reduce using rule 21 (expresion -> expresion MINUS term .)
+    VARIABLE_INSTANCE reduce using rule 21 (expresion -> expresion MINUS term .)
+    VARIABLE_CLASS  reduce using rule 21 (expresion -> expresion MINUS term .)
+    VARIABLE_GLOBAL reduce using rule 21 (expresion -> expresion MINUS term .)
+    CONSTANT        reduce using rule 21 (expresion -> expresion MINUS term .)
+    NUMBER          reduce using rule 21 (expresion -> expresion MINUS term .)
+    L_PAREN         reduce using rule 21 (expresion -> expresion MINUS term .)
+    END             reduce using rule 21 (expresion -> expresion MINUS term .)
+
+
+state 38
+
+    (22) expresion -> expresion MULTIPLICATION term .
+
+    PLUS            reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    MINUS           reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    MULTIPLICATION  reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    DIVIDE          reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    EXPONENT        reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    MODULE          reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    AND_LOGIC       reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    OR_LOGIC        reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    EQUALITY        reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    EQUALITY_OF_CASE reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    GREATER_EQUAL   reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    GREATER_THAN    reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    SMALLER_THAN    reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    SMALLER_EQUAL   reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    $end            reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    R_PAREN         reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    PUTS            reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    VARIABLE_LOCAL  reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    VARIABLE_INSTANCE reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    VARIABLE_CLASS  reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    VARIABLE_GLOBAL reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    CONSTANT        reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    NUMBER          reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    L_PAREN         reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+    END             reduce using rule 22 (expresion -> expresion MULTIPLICATION term .)
+
+
+state 39
+
+    (23) expresion -> expresion DIVIDE term .
+
+    PLUS            reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    MINUS           reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    MULTIPLICATION  reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    DIVIDE          reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    EXPONENT        reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    MODULE          reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    AND_LOGIC       reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    OR_LOGIC        reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    EQUALITY        reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    EQUALITY_OF_CASE reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    GREATER_EQUAL   reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    GREATER_THAN    reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    SMALLER_THAN    reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    SMALLER_EQUAL   reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    $end            reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    R_PAREN         reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    PUTS            reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    VARIABLE_LOCAL  reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    VARIABLE_INSTANCE reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    VARIABLE_CLASS  reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    VARIABLE_GLOBAL reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    CONSTANT        reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    NUMBER          reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    L_PAREN         reduce using rule 23 (expresion -> expresion DIVIDE term .)
+    END             reduce using rule 23 (expresion -> expresion DIVIDE term .)
+
+
+state 40
+
+    (24) expresion -> expresion EXPONENT term .
+
+    PLUS            reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    MINUS           reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    MULTIPLICATION  reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    DIVIDE          reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    EXPONENT        reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    MODULE          reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    AND_LOGIC       reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    OR_LOGIC        reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    EQUALITY        reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    EQUALITY_OF_CASE reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    GREATER_EQUAL   reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    GREATER_THAN    reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    SMALLER_THAN    reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    SMALLER_EQUAL   reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    $end            reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    R_PAREN         reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    PUTS            reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    VARIABLE_LOCAL  reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    VARIABLE_INSTANCE reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    VARIABLE_CLASS  reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    VARIABLE_GLOBAL reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    CONSTANT        reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    NUMBER          reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    L_PAREN         reduce using rule 24 (expresion -> expresion EXPONENT term .)
+    END             reduce using rule 24 (expresion -> expresion EXPONENT term .)
+
+
+state 41
+
+    (25) expresion -> expresion MODULE term .
+
+    PLUS            reduce using rule 25 (expresion -> expresion MODULE term .)
+    MINUS           reduce using rule 25 (expresion -> expresion MODULE term .)
+    MULTIPLICATION  reduce using rule 25 (expresion -> expresion MODULE term .)
+    DIVIDE          reduce using rule 25 (expresion -> expresion MODULE term .)
+    EXPONENT        reduce using rule 25 (expresion -> expresion MODULE term .)
+    MODULE          reduce using rule 25 (expresion -> expresion MODULE term .)
+    AND_LOGIC       reduce using rule 25 (expresion -> expresion MODULE term .)
+    OR_LOGIC        reduce using rule 25 (expresion -> expresion MODULE term .)
+    EQUALITY        reduce using rule 25 (expresion -> expresion MODULE term .)
+    EQUALITY_OF_CASE reduce using rule 25 (expresion -> expresion MODULE term .)
+    GREATER_EQUAL   reduce using rule 25 (expresion -> expresion MODULE term .)
+    GREATER_THAN    reduce using rule 25 (expresion -> expresion MODULE term .)
+    SMALLER_THAN    reduce using rule 25 (expresion -> expresion MODULE term .)
+    SMALLER_EQUAL   reduce using rule 25 (expresion -> expresion MODULE term .)
+    $end            reduce using rule 25 (expresion -> expresion MODULE term .)
+    R_PAREN         reduce using rule 25 (expresion -> expresion MODULE term .)
+    PUTS            reduce using rule 25 (expresion -> expresion MODULE term .)
+    VARIABLE_LOCAL  reduce using rule 25 (expresion -> expresion MODULE term .)
+    VARIABLE_INSTANCE reduce using rule 25 (expresion -> expresion MODULE term .)
+    VARIABLE_CLASS  reduce using rule 25 (expresion -> expresion MODULE term .)
+    VARIABLE_GLOBAL reduce using rule 25 (expresion -> expresion MODULE term .)
+    CONSTANT        reduce using rule 25 (expresion -> expresion MODULE term .)
+    NUMBER          reduce using rule 25 (expresion -> expresion MODULE term .)
+    L_PAREN         reduce using rule 25 (expresion -> expresion MODULE term .)
+    END             reduce using rule 25 (expresion -> expresion MODULE term .)
+
+
+state 42
+
+    (26) expresion -> expresion AND_LOGIC term .
+
+    PLUS            reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    MINUS           reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    MULTIPLICATION  reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    DIVIDE          reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    EXPONENT        reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    MODULE          reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    AND_LOGIC       reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    OR_LOGIC        reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    EQUALITY        reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    EQUALITY_OF_CASE reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    GREATER_EQUAL   reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    GREATER_THAN    reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    SMALLER_THAN    reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    SMALLER_EQUAL   reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    $end            reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    R_PAREN         reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    PUTS            reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    VARIABLE_LOCAL  reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    VARIABLE_INSTANCE reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    VARIABLE_CLASS  reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    VARIABLE_GLOBAL reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    CONSTANT        reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    NUMBER          reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    L_PAREN         reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+    END             reduce using rule 26 (expresion -> expresion AND_LOGIC term .)
+
+
+state 43
+
+    (27) expresion -> expresion OR_LOGIC term .
+
+    PLUS            reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    MINUS           reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    MULTIPLICATION  reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    DIVIDE          reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    EXPONENT        reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    MODULE          reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    AND_LOGIC       reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    OR_LOGIC        reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    EQUALITY        reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    EQUALITY_OF_CASE reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    GREATER_EQUAL   reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    GREATER_THAN    reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    SMALLER_THAN    reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    SMALLER_EQUAL   reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    $end            reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    R_PAREN         reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    PUTS            reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    VARIABLE_LOCAL  reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    VARIABLE_INSTANCE reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    VARIABLE_CLASS  reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    VARIABLE_GLOBAL reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    CONSTANT        reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    NUMBER          reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    L_PAREN         reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+    END             reduce using rule 27 (expresion -> expresion OR_LOGIC term .)
+
+
+state 44
+
+    (28) expresion -> expresion EQUALITY term .
+
+    PLUS            reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    MINUS           reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    MULTIPLICATION  reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    DIVIDE          reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    EXPONENT        reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    MODULE          reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    AND_LOGIC       reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    OR_LOGIC        reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    EQUALITY        reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    EQUALITY_OF_CASE reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    GREATER_EQUAL   reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    GREATER_THAN    reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    SMALLER_THAN    reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    SMALLER_EQUAL   reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    $end            reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    R_PAREN         reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    PUTS            reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    VARIABLE_LOCAL  reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    VARIABLE_INSTANCE reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    VARIABLE_CLASS  reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    VARIABLE_GLOBAL reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    CONSTANT        reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    NUMBER          reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    L_PAREN         reduce using rule 28 (expresion -> expresion EQUALITY term .)
+    END             reduce using rule 28 (expresion -> expresion EQUALITY term .)
+
+
+state 45
+
+    (29) expresion -> expresion EQUALITY_OF_CASE term .
+
+    PLUS            reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    MINUS           reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    MULTIPLICATION  reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    DIVIDE          reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    EXPONENT        reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    MODULE          reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    AND_LOGIC       reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    OR_LOGIC        reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    EQUALITY        reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    EQUALITY_OF_CASE reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    GREATER_EQUAL   reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    GREATER_THAN    reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    SMALLER_THAN    reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    SMALLER_EQUAL   reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    $end            reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    R_PAREN         reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    PUTS            reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    VARIABLE_LOCAL  reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    VARIABLE_INSTANCE reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    VARIABLE_CLASS  reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    VARIABLE_GLOBAL reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    CONSTANT        reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    NUMBER          reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    L_PAREN         reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+    END             reduce using rule 29 (expresion -> expresion EQUALITY_OF_CASE term .)
+
+
+state 46
+
+    (30) expresion -> expresion GREATER_EQUAL term .
+
+    PLUS            reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    MINUS           reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    MULTIPLICATION  reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    DIVIDE          reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    EXPONENT        reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    MODULE          reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    AND_LOGIC       reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    OR_LOGIC        reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    EQUALITY        reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    EQUALITY_OF_CASE reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    GREATER_EQUAL   reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    GREATER_THAN    reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    SMALLER_THAN    reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    SMALLER_EQUAL   reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    $end            reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    R_PAREN         reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    PUTS            reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    VARIABLE_LOCAL  reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    VARIABLE_INSTANCE reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    VARIABLE_CLASS  reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    VARIABLE_GLOBAL reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    CONSTANT        reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    NUMBER          reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    L_PAREN         reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+    END             reduce using rule 30 (expresion -> expresion GREATER_EQUAL term .)
+
+
+state 47
+
+    (31) expresion -> expresion GREATER_THAN term .
+
+    PLUS            reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    MINUS           reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    MULTIPLICATION  reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    DIVIDE          reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    EXPONENT        reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    MODULE          reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    AND_LOGIC       reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    OR_LOGIC        reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    EQUALITY        reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    EQUALITY_OF_CASE reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    GREATER_EQUAL   reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    GREATER_THAN    reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    SMALLER_THAN    reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    SMALLER_EQUAL   reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    $end            reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    R_PAREN         reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    PUTS            reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    VARIABLE_LOCAL  reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    VARIABLE_INSTANCE reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    VARIABLE_CLASS  reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    VARIABLE_GLOBAL reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    CONSTANT        reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    NUMBER          reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    L_PAREN         reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+    END             reduce using rule 31 (expresion -> expresion GREATER_THAN term .)
+
+
+state 48
+
+    (32) expresion -> expresion SMALLER_THAN term .
+
+    PLUS            reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    MINUS           reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    MULTIPLICATION  reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    DIVIDE          reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    EXPONENT        reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    MODULE          reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    AND_LOGIC       reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    OR_LOGIC        reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    EQUALITY        reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    EQUALITY_OF_CASE reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    GREATER_EQUAL   reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    GREATER_THAN    reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    SMALLER_THAN    reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    SMALLER_EQUAL   reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    $end            reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    R_PAREN         reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    PUTS            reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    VARIABLE_LOCAL  reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    VARIABLE_INSTANCE reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    VARIABLE_CLASS  reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    VARIABLE_GLOBAL reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    CONSTANT        reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    NUMBER          reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    L_PAREN         reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+    END             reduce using rule 32 (expresion -> expresion SMALLER_THAN term .)
+
+
+state 49
+
+    (33) expresion -> expresion SMALLER_EQUAL term .
+
+    PLUS            reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    MINUS           reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    MULTIPLICATION  reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    DIVIDE          reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    EXPONENT        reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    MODULE          reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    AND_LOGIC       reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    OR_LOGIC        reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    EQUALITY        reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    EQUALITY_OF_CASE reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    GREATER_EQUAL   reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    GREATER_THAN    reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    SMALLER_THAN    reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    SMALLER_EQUAL   reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    $end            reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    R_PAREN         reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    PUTS            reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    VARIABLE_LOCAL  reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    VARIABLE_INSTANCE reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    VARIABLE_CLASS  reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    VARIABLE_GLOBAL reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    CONSTANT        reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    NUMBER          reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    L_PAREN         reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+    END             reduce using rule 33 (expresion -> expresion SMALLER_EQUAL term .)
+
+
+state 50
+
+    (5) funcion -> DEF VARIABLE_LOCAL L_PAREN . parametros R_PAREN cuerpo END
+    (6) parametros -> . VARIABLE_LOCAL
+    (7) parametros -> . VARIABLE_LOCAL COMMA parametros
+
+    VARIABLE_LOCAL  shift and go to state 56
+
+    parametros                     shift and go to state 57
+
+state 51
+
+    (37) term -> L_PAREN expresion R_PAREN .
+
+    PLUS            reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    MINUS           reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    MULTIPLICATION  reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    DIVIDE          reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    EXPONENT        reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    MODULE          reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    AND_LOGIC       reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    OR_LOGIC        reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    EQUALITY        reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    EQUALITY_OF_CASE reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    GREATER_EQUAL   reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    GREATER_THAN    reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    SMALLER_THAN    reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    SMALLER_EQUAL   reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    $end            reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    R_PAREN         reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    PUTS            reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    VARIABLE_LOCAL  reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    VARIABLE_INSTANCE reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    VARIABLE_CLASS  reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    VARIABLE_GLOBAL reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    CONSTANT        reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    NUMBER          reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    L_PAREN         reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+    END             reduce using rule 37 (term -> L_PAREN expresion R_PAREN .)
+
+
+state 52
+
+    (14) declaracion -> variable EQUAL expresion .
+    (20) expresion -> expresion . PLUS term
+    (21) expresion -> expresion . MINUS term
+    (22) expresion -> expresion . MULTIPLICATION term
+    (23) expresion -> expresion . DIVIDE term
+    (24) expresion -> expresion . EXPONENT term
+    (25) expresion -> expresion . MODULE term
+    (26) expresion -> expresion . AND_LOGIC term
+    (27) expresion -> expresion . OR_LOGIC term
+    (28) expresion -> expresion . EQUALITY term
+    (29) expresion -> expresion . EQUALITY_OF_CASE term
+    (30) expresion -> expresion . GREATER_EQUAL term
+    (31) expresion -> expresion . GREATER_THAN term
+    (32) expresion -> expresion . SMALLER_THAN term
+    (33) expresion -> expresion . SMALLER_EQUAL term
+
+    $end            reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    PUTS            reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    VARIABLE_LOCAL  reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    VARIABLE_INSTANCE reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    VARIABLE_CLASS  reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    VARIABLE_GLOBAL reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    CONSTANT        reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    NUMBER          reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    L_PAREN         reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    END             reduce using rule 14 (declaracion -> variable EQUAL expresion .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    MULTIPLICATION  shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENT        shift and go to state 21
+    MODULE          shift and go to state 22
+    AND_LOGIC       shift and go to state 23
+    OR_LOGIC        shift and go to state 24
+    EQUALITY        shift and go to state 25
+    EQUALITY_OF_CASE shift and go to state 26
+    GREATER_EQUAL   shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    SMALLER_THAN    shift and go to state 29
+    SMALLER_EQUAL   shift and go to state 30
+
+
+state 53
+
+    (38) print -> PUTS L_PAREN expresion . R_PAREN
+    (20) expresion -> expresion . PLUS term
+    (21) expresion -> expresion . MINUS term
+    (22) expresion -> expresion . MULTIPLICATION term
+    (23) expresion -> expresion . DIVIDE term
+    (24) expresion -> expresion . EXPONENT term
+    (25) expresion -> expresion . MODULE term
+    (26) expresion -> expresion . AND_LOGIC term
+    (27) expresion -> expresion . OR_LOGIC term
+    (28) expresion -> expresion . EQUALITY term
+    (29) expresion -> expresion . EQUALITY_OF_CASE term
+    (30) expresion -> expresion . GREATER_EQUAL term
+    (31) expresion -> expresion . GREATER_THAN term
+    (32) expresion -> expresion . SMALLER_THAN term
+    (33) expresion -> expresion . SMALLER_EQUAL term
+
+    R_PAREN         shift and go to state 58
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    MULTIPLICATION  shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENT        shift and go to state 21
+    MODULE          shift and go to state 22
+    AND_LOGIC       shift and go to state 23
+    OR_LOGIC        shift and go to state 24
+    EQUALITY        shift and go to state 25
+    EQUALITY_OF_CASE shift and go to state 26
+    GREATER_EQUAL   shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    SMALLER_THAN    shift and go to state 29
+    SMALLER_EQUAL   shift and go to state 30
+
+
+state 54
+
+    (40) print -> PUTS L_PAREN R_PAREN .
+
+    $end            reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    PUTS            reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    VARIABLE_LOCAL  reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    VARIABLE_INSTANCE reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    VARIABLE_CLASS  reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    VARIABLE_GLOBAL reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    CONSTANT        reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    NUMBER          reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    L_PAREN         reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+    END             reduce using rule 40 (print -> PUTS L_PAREN R_PAREN .)
+
+
+state 55
+
+    (39) print -> PUTS L_PAREN variable . R_PAREN
+    (36) term -> variable .
+
+  ! shift/reduce conflict for R_PAREN resolved as shift
+    R_PAREN         shift and go to state 59
+    PLUS            reduce using rule 36 (term -> variable .)
+    MINUS           reduce using rule 36 (term -> variable .)
+    MULTIPLICATION  reduce using rule 36 (term -> variable .)
+    DIVIDE          reduce using rule 36 (term -> variable .)
+    EXPONENT        reduce using rule 36 (term -> variable .)
+    MODULE          reduce using rule 36 (term -> variable .)
+    AND_LOGIC       reduce using rule 36 (term -> variable .)
+    OR_LOGIC        reduce using rule 36 (term -> variable .)
+    EQUALITY        reduce using rule 36 (term -> variable .)
+    EQUALITY_OF_CASE reduce using rule 36 (term -> variable .)
+    GREATER_EQUAL   reduce using rule 36 (term -> variable .)
+    GREATER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_THAN    reduce using rule 36 (term -> variable .)
+    SMALLER_EQUAL   reduce using rule 36 (term -> variable .)
+
+  ! R_PAREN         [ reduce using rule 36 (term -> variable .) ]
+
+
+state 56
+
+    (6) parametros -> VARIABLE_LOCAL .
+    (7) parametros -> VARIABLE_LOCAL . COMMA parametros
+
+    R_PAREN         reduce using rule 6 (parametros -> VARIABLE_LOCAL .)
+    COMMA           shift and go to state 60
+
+
+state 57
+
+    (5) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros . R_PAREN cuerpo END
+
+    R_PAREN         shift and go to state 61
+
+
+state 58
+
+    (38) print -> PUTS L_PAREN expresion R_PAREN .
+
+    $end            reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    PUTS            reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    VARIABLE_LOCAL  reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    VARIABLE_INSTANCE reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    VARIABLE_CLASS  reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    VARIABLE_GLOBAL reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    CONSTANT        reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    NUMBER          reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    L_PAREN         reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+    END             reduce using rule 38 (print -> PUTS L_PAREN expresion R_PAREN .)
+
+
+state 59
+
+    (39) print -> PUTS L_PAREN variable R_PAREN .
+
+    $end            reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    PUTS            reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    VARIABLE_LOCAL  reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    VARIABLE_INSTANCE reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    VARIABLE_CLASS  reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    VARIABLE_GLOBAL reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    CONSTANT        reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    NUMBER          reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    L_PAREN         reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+    END             reduce using rule 39 (print -> PUTS L_PAREN variable R_PAREN .)
+
+
+state 60
+
+    (7) parametros -> VARIABLE_LOCAL COMMA . parametros
+    (6) parametros -> . VARIABLE_LOCAL
+    (7) parametros -> . VARIABLE_LOCAL COMMA parametros
+
+    VARIABLE_LOCAL  shift and go to state 56
+
+    parametros                     shift and go to state 62
+
+state 61
+
+    (5) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN . cuerpo END
+    (8) cuerpo -> . declaracion
+    (9) cuerpo -> . declaracion cuerpo
+    (10) cuerpo -> . print
+    (11) cuerpo -> . print cuerpo
+    (12) cuerpo -> . expresion
+    (13) cuerpo -> . expresion cuerpo
+    (14) declaracion -> . variable EQUAL expresion
+    (38) print -> . PUTS L_PAREN expresion R_PAREN
+    (39) print -> . PUTS L_PAREN variable R_PAREN
+    (40) print -> . PUTS L_PAREN R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    PUTS            shift and go to state 11
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    cuerpo                         shift and go to state 63
+    declaracion                    shift and go to state 64
+    print                          shift and go to state 65
+    expresion                      shift and go to state 66
+    variable                       shift and go to state 9
+    term                           shift and go to state 10
+
+state 62
+
+    (7) parametros -> VARIABLE_LOCAL COMMA parametros .
+
+    R_PAREN         reduce using rule 7 (parametros -> VARIABLE_LOCAL COMMA parametros .)
+
+
+state 63
+
+    (5) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo . END
+
+    END             shift and go to state 67
+
+
+state 64
+
+    (8) cuerpo -> declaracion .
+    (9) cuerpo -> declaracion . cuerpo
+    (8) cuerpo -> . declaracion
+    (9) cuerpo -> . declaracion cuerpo
+    (10) cuerpo -> . print
+    (11) cuerpo -> . print cuerpo
+    (12) cuerpo -> . expresion
+    (13) cuerpo -> . expresion cuerpo
+    (14) declaracion -> . variable EQUAL expresion
+    (38) print -> . PUTS L_PAREN expresion R_PAREN
+    (39) print -> . PUTS L_PAREN variable R_PAREN
+    (40) print -> . PUTS L_PAREN R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    END             reduce using rule 8 (cuerpo -> declaracion .)
+    PUTS            shift and go to state 11
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    declaracion                    shift and go to state 64
+    cuerpo                         shift and go to state 68
+    print                          shift and go to state 65
+    expresion                      shift and go to state 66
+    variable                       shift and go to state 9
+    term                           shift and go to state 10
+
+state 65
+
+    (10) cuerpo -> print .
+    (11) cuerpo -> print . cuerpo
+    (8) cuerpo -> . declaracion
+    (9) cuerpo -> . declaracion cuerpo
+    (10) cuerpo -> . print
+    (11) cuerpo -> . print cuerpo
+    (12) cuerpo -> . expresion
+    (13) cuerpo -> . expresion cuerpo
+    (14) declaracion -> . variable EQUAL expresion
+    (38) print -> . PUTS L_PAREN expresion R_PAREN
+    (39) print -> . PUTS L_PAREN variable R_PAREN
+    (40) print -> . PUTS L_PAREN R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    END             reduce using rule 10 (cuerpo -> print .)
+    PUTS            shift and go to state 11
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    print                          shift and go to state 65
+    cuerpo                         shift and go to state 69
+    declaracion                    shift and go to state 64
+    expresion                      shift and go to state 66
+    variable                       shift and go to state 9
+    term                           shift and go to state 10
+
+state 66
+
+    (12) cuerpo -> expresion .
+    (13) cuerpo -> expresion . cuerpo
+    (20) expresion -> expresion . PLUS term
+    (21) expresion -> expresion . MINUS term
+    (22) expresion -> expresion . MULTIPLICATION term
+    (23) expresion -> expresion . DIVIDE term
+    (24) expresion -> expresion . EXPONENT term
+    (25) expresion -> expresion . MODULE term
+    (26) expresion -> expresion . AND_LOGIC term
+    (27) expresion -> expresion . OR_LOGIC term
+    (28) expresion -> expresion . EQUALITY term
+    (29) expresion -> expresion . EQUALITY_OF_CASE term
+    (30) expresion -> expresion . GREATER_EQUAL term
+    (31) expresion -> expresion . GREATER_THAN term
+    (32) expresion -> expresion . SMALLER_THAN term
+    (33) expresion -> expresion . SMALLER_EQUAL term
+    (8) cuerpo -> . declaracion
+    (9) cuerpo -> . declaracion cuerpo
+    (10) cuerpo -> . print
+    (11) cuerpo -> . print cuerpo
+    (12) cuerpo -> . expresion
+    (13) cuerpo -> . expresion cuerpo
+    (14) declaracion -> . variable EQUAL expresion
+    (38) print -> . PUTS L_PAREN expresion R_PAREN
+    (39) print -> . PUTS L_PAREN variable R_PAREN
+    (40) print -> . PUTS L_PAREN R_PAREN
+    (20) expresion -> . expresion PLUS term
+    (21) expresion -> . expresion MINUS term
+    (22) expresion -> . expresion MULTIPLICATION term
+    (23) expresion -> . expresion DIVIDE term
+    (24) expresion -> . expresion EXPONENT term
+    (25) expresion -> . expresion MODULE term
+    (26) expresion -> . expresion AND_LOGIC term
+    (27) expresion -> . expresion OR_LOGIC term
+    (28) expresion -> . expresion EQUALITY term
+    (29) expresion -> . expresion EQUALITY_OF_CASE term
+    (30) expresion -> . expresion GREATER_EQUAL term
+    (31) expresion -> . expresion GREATER_THAN term
+    (32) expresion -> . expresion SMALLER_THAN term
+    (33) expresion -> . expresion SMALLER_EQUAL term
+    (34) expresion -> . term
+    (15) variable -> . VARIABLE_LOCAL
+    (16) variable -> . VARIABLE_INSTANCE
+    (17) variable -> . VARIABLE_CLASS
+    (18) variable -> . VARIABLE_GLOBAL
+    (19) variable -> . CONSTANT
+    (35) term -> . NUMBER
+    (36) term -> . variable
+    (37) term -> . L_PAREN expresion R_PAREN
+
+    END             reduce using rule 12 (cuerpo -> expresion .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    MULTIPLICATION  shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENT        shift and go to state 21
+    MODULE          shift and go to state 22
+    AND_LOGIC       shift and go to state 23
+    OR_LOGIC        shift and go to state 24
+    EQUALITY        shift and go to state 25
+    EQUALITY_OF_CASE shift and go to state 26
+    GREATER_EQUAL   shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    SMALLER_THAN    shift and go to state 29
+    SMALLER_EQUAL   shift and go to state 30
+    PUTS            shift and go to state 11
+    VARIABLE_LOCAL  shift and go to state 7
+    VARIABLE_INSTANCE shift and go to state 12
+    VARIABLE_CLASS  shift and go to state 13
+    VARIABLE_GLOBAL shift and go to state 14
+    CONSTANT        shift and go to state 15
+    NUMBER          shift and go to state 16
+    L_PAREN         shift and go to state 8
+
+    expresion                      shift and go to state 66
+    cuerpo                         shift and go to state 70
+    term                           shift and go to state 10
+    declaracion                    shift and go to state 64
+    print                          shift and go to state 65
+    variable                       shift and go to state 9
+
+state 67
+
+    (5) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END .
+
+    $end            reduce using rule 5 (funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END .)
+
+
+state 68
+
+    (9) cuerpo -> declaracion cuerpo .
+
+    END             reduce using rule 9 (cuerpo -> declaracion cuerpo .)
+
+
+state 69
+
+    (11) cuerpo -> print cuerpo .
+
+    END             reduce using rule 11 (cuerpo -> print cuerpo .)
+
+
+state 70
+
+    (13) cuerpo -> expresion cuerpo .
+
+    END             reduce using rule 13 (cuerpo -> expresion cuerpo .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for R_PAREN in state 55 resolved as shift

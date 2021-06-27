@@ -1,6 +1,7 @@
 import ply.lex as lex
-# Reserved words hash
-# Aarón reyes - palabras reservadas
+
+# AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
+# Mapa de palabras reservadas
 reserved = {
     'and' : 'AND',
     'begin' : 'BEGIN',
@@ -21,6 +22,7 @@ reserved = {
     'nil' : 'NIL',
     'not' : 'NOT',
     'or' : 'OR',
+    'puts' : 'PUTS',
     'rescue' : 'RESCUE',
     'retry' : 'RETRY',
     'return' : 'RETURN',
@@ -31,8 +33,7 @@ reserved = {
     'while' : 'WHILE',
 }
 
-
-# start Aarón Reyes - tokens
+# Tupla de tokens
 tokens = (
     'AND_LOGIC',
     'COINCIDENCE',
@@ -60,39 +61,37 @@ tokens = (
     'WRENCH_R',
     'COMMA',
     'DOUBLE_QUOTE',
-    #end Aarón Reyes - tokens
-    # start Katiuska Marín S.
     'VARIABLE_LOCAL',
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
-    'CONSTANT',
-    # end Katiuska Marín S.
+    'CONSTANT'
 ) + tuple(reserved.values())
+# AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
-
-# Regular expression rules for simple tokens
-# start Aarón Reyes - ERtokens
+# AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
+# Regla de expresiones regulares para los tokens
 t_AND_LOGIC = r'&'
-t_COINCIDENCE = r'=~'
-t_COMPOSITION = r'\|&'
 t_DIVIDE = r'/'
-t_EQUAL = r'\='
 t_EQUALITY = r'=='
 t_EQUALITY_OF_CASE = r'==='
 t_EXPONENT = r'\*\*'
 t_GREATER_EQUAL = r'>='
 t_GREATER_THAN = r'>'
-t_L_PAREN = r'\('
 t_MINUS = r'-'
 t_MODULE = r'%'
 t_MULTIPLICATION = r'\*'
-t_NEGATION = r'!'
 t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
-t_R_PAREN = r'\)'
 t_SMALLER_THAN = r'<'
 t_SMALLER_EQUAL = r'<='
+#################################################
+t_COINCIDENCE = r'=~'
+t_COMPOSITION = r'\|&'
+t_EQUAL = r'\='
+t_L_PAREN = r'\('
+t_NEGATION = r'!'
+t_R_PAREN = r'\)'
 t_QUOTATION_MARK = r'\''
 t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
@@ -104,7 +103,7 @@ def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
-# end Aarón Reyes - ERtokens
+# AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
 
 # Expreciones que definen una variable
