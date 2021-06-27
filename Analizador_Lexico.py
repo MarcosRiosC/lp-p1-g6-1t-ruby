@@ -46,6 +46,7 @@ tokens = (
     'GREATER_EQUAL',
     'GREATER_THAN',
     'L_PAREN',
+    'L_SQUARE_BRACKET',
     'MINUS',
     'MODULE',
     'MULTIPLICATION',
@@ -53,6 +54,7 @@ tokens = (
     'NUMBER',
     'OR_LOGIC',
     'PLUS',
+    'R_SQUARE_BRACKET',
     'R_PAREN',
     'SMALLER_THAN',
     'SMALLER_EQUAL',
@@ -91,7 +93,9 @@ t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
 t_EQUAL = r'\='
 t_L_PAREN = r'\('
+t_L_SQUARE_BRACKET = r'\['
 t_NEGATION = r'!'
+t_R_SQUARE_BRACKET = r'\]'
 t_R_PAREN = r'\)'
 t_QUOTATION_MARK = r'\''
 t_WRENCH_L = r'\{'
