@@ -11,7 +11,7 @@ reserved = {
     'def' : 'DEF',
     'do' : 'DO',
     'else' : 'ELSE',
-    'elsif' : 'ELIF',
+    'elsif' : 'ELSIF',
     'end' : 'END',
     'ensure' : 'ENSURE',
     'false' : 'FALSE',
@@ -61,6 +61,7 @@ tokens = (
     'WRENCH_R',
     'COMMA',
     'DOUBLE_QUOTE',
+    'DOUBLE_POINT',
     'VARIABLE_LOCAL',
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
@@ -97,6 +98,7 @@ t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
 t_COMMA = r'\,'
 t_DOUBLE_QUOTE = r'"'
+t_DOUBLE_POINT = r'\..'
 t_ignore = ' \t'
 
 def t_NUMBER(t):
@@ -132,6 +134,10 @@ def t_VARIABLE_GLOBAL(t):
     r'\$[a-z_][a-zA-Z_]+\d*'
     t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
     return t
+
+def t_COMMENT(t):
+    r'\#.*'
+    pass
 # end Katiuska Marín S.
 
 # De aquí en adelante el código fue reciclado de la práctica en clases.

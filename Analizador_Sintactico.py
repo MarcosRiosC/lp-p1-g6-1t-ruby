@@ -7,9 +7,10 @@ def p_sentencia(p):
     '''sentencia : funcion
                 | declaracion
                 | expresion
+                | estructura
                 | print'''
 
-
+#estructuraControl estructuraDatos
 #FUNCION
 def p_funcion(p):
     '''funcion : DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END'''
@@ -83,10 +84,44 @@ def p_print_var(p):
     'print : PUTS L_PAREN variable R_PAREN'
 def p_print_vac(p):
     'print : PUTS L_PAREN R_PAREN'
-'''def p_print_str(p):
-    'print : PUTS L_PAREN STRING R_PAREN'''
+##def p_print_str(p):
+##    'print : PUTS L_PAREN STRING R_PAREN'''
+#AQUÍ TERMINA MI TRABAJO - AARÓN REYES
+
+#AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
+def p_estructura(p):
+    '''estructura : estructuraCondicional
+                    | estructuraIterativa'''
+
+def p_estructuraCondicional(p):
+    '''estructuraCondicional : estructuraif END
+                             | estructuraif estructuraelse END
+                             | estructuraif estructuraelseif END'''
+
+def p_estructuraif(p):
+    'estructuraif : IF expresion cuerpo'
+
+def p_estructuraelsif(p):
+    'estructuraelseif : ELSIF expresion cuerpo'
+
+def p_estructuraelse(p):
+    'estructuraelse : ELSE cuerpo'
 
 
+def p_estructuraIterativa(p):
+    '''estructuraIterativa : sentenciafor END
+                            | sentenciawhile END'''
+
+def p_sentenciafor(p):
+    'sentenciafor : FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo'
+
+def p_sentenciawhile(p):
+    'sentenciawhile : WHILE expresion cuerpo'
+
+
+#AQUÍ TERMINA KATIUSKA MARÍN
+
+#AQUÍ EMPIEZA MI TRABAJO - AARÓN REYES
 #EVALUADOR DE ERRORES
 def p_error(p):
     if p:
