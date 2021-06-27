@@ -96,7 +96,7 @@ t_SMALLER_EQUAL = r'<='
 t_QUOTATION_MARK = r'\''
 t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
-t_COMMA = r','
+t_COMMA = r'\,'
 t_DOUBLE_QUOTE = r'"'
 t_ignore = ' \t'
 
@@ -156,11 +156,11 @@ def getTokens(lexer):
             break  # No more input
         print(tok)
 
-linea = " "
+'''linea = " "
 
 while linea != "":
     linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
-print("Succesfull")
+print("Succesfull")'''
