@@ -84,11 +84,13 @@ def p_print_var(p):
     'print : PUTS L_PAREN variable R_PAREN'
 def p_print_vac(p):
     'print : PUTS L_PAREN R_PAREN'
-##def p_print_str(p):
-##    'print : PUTS L_PAREN STRING R_PAREN'''
+
 #AQUÍ TERMINA MI TRABAJO - AARÓN REYES
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
+def p_print_str(p):
+    'print : PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK '''
+
 def p_estructura(p):
     '''estructura : estructuraCondicional
                     | estructuraIterativa'''

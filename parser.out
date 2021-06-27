@@ -17,7 +17,6 @@ Unused terminals:
     NIL
     NOT
     OR
-    QUOTATION_MARK
     RESCUE
     RETRY
     RETURN
@@ -73,18 +72,19 @@ Rule 38    term -> L_PAREN expresion R_PAREN
 Rule 39    print -> PUTS L_PAREN expresion R_PAREN
 Rule 40    print -> PUTS L_PAREN variable R_PAREN
 Rule 41    print -> PUTS L_PAREN R_PAREN
-Rule 42    estructura -> estructuraCondicional
-Rule 43    estructura -> estructuraIterativa
-Rule 44    estructuraCondicional -> estructuraif END
-Rule 45    estructuraCondicional -> estructuraif estructuraelse END
-Rule 46    estructuraCondicional -> estructuraif estructuraelseif END
-Rule 47    estructuraif -> IF expresion cuerpo
-Rule 48    estructuraelseif -> ELSIF expresion cuerpo
-Rule 49    estructuraelse -> ELSE cuerpo
-Rule 50    estructuraIterativa -> sentenciafor END
-Rule 51    estructuraIterativa -> sentenciawhile END
-Rule 52    sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
-Rule 53    sentenciawhile -> WHILE expresion cuerpo
+Rule 42    print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
+Rule 43    estructura -> estructuraCondicional
+Rule 44    estructura -> estructuraIterativa
+Rule 45    estructuraCondicional -> estructuraif END
+Rule 46    estructuraCondicional -> estructuraif estructuraelse END
+Rule 47    estructuraCondicional -> estructuraif estructuraelseif END
+Rule 48    estructuraif -> IF expresion cuerpo
+Rule 49    estructuraelseif -> ELSIF expresion cuerpo
+Rule 50    estructuraelse -> ELSE cuerpo
+Rule 51    estructuraIterativa -> sentenciafor END
+Rule 52    estructuraIterativa -> sentenciawhile END
+Rule 53    sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+Rule 54    sentenciawhile -> WHILE expresion cuerpo
 
 Terminals, with rules where they appear
 
@@ -101,39 +101,39 @@ CONSTANT             : 20
 DEF                  : 6
 DIVIDE               : 24
 DO                   : 
-DOUBLE_POINT         : 52
+DOUBLE_POINT         : 53
 DOUBLE_QUOTE         : 
-ELSE                 : 49
-ELSIF                : 48
-END                  : 6 44 45 46 50 51
+ELSE                 : 50
+ELSIF                : 49
+END                  : 6 45 46 47 51 52
 ENSURE               : 
 EQUAL                : 15
 EQUALITY             : 29
 EQUALITY_OF_CASE     : 30
 EXPONENT             : 25
 FALSE                : 
-FOR                  : 52
+FOR                  : 53
 GREATER_EQUAL        : 31
 GREATER_THAN         : 32
-IF                   : 47
-IN                   : 52
-L_PAREN              : 6 38 39 40 41 52
+IF                   : 48
+IN                   : 53
+L_PAREN              : 6 38 39 40 41 53
 MINUS                : 22
 MODULE               : 26
 MULTIPLICATION       : 23
 NEGATION             : 
 NIL                  : 
 NOT                  : 
-NUMBER               : 36 52 52
+NUMBER               : 36 53 53
 OR                   : 
 OR_LOGIC             : 28
 PLUS                 : 21
-PUTS                 : 39 40 41
-QUOTATION_MARK       : 
+PUTS                 : 39 40 41 42
+QUOTATION_MARK       : 42 42
 RESCUE               : 
 RETRY                : 
 RETURN               : 
-R_PAREN              : 6 38 39 40 41 52
+R_PAREN              : 6 38 39 40 41 53
 SMALLER_EQUAL        : 34
 SMALLER_THAN         : 33
 THEN                 : 
@@ -143,32 +143,32 @@ UNTIL                :
 VARIABLE_CLASS       : 18
 VARIABLE_GLOBAL      : 19
 VARIABLE_INSTANCE    : 17
-VARIABLE_LOCAL       : 6 7 8 16
+VARIABLE_LOCAL       : 6 7 8 16 42
 WHEN                 : 
-WHILE                : 53
+WHILE                : 54
 WRENCH_L             : 
 WRENCH_R             : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-cuerpo               : 6 10 12 14 47 48 49 52 53
+cuerpo               : 6 10 12 14 48 49 50 53 54
 declaracion          : 2 9 10
 estructura           : 4
-estructuraCondicional : 42
-estructuraIterativa  : 43
-estructuraelse       : 45
-estructuraelseif     : 46
-estructuraif         : 44 45 46
-expresion            : 3 13 14 15 21 22 23 24 25 26 27 28 29 30 31 32 33 34 38 39 47 48 53
+estructuraCondicional : 43
+estructuraIterativa  : 44
+estructuraelse       : 46
+estructuraelseif     : 47
+estructuraif         : 45 46 47
+expresion            : 3 13 14 15 21 22 23 24 25 26 27 28 29 30 31 32 33 34 38 39 48 49 54
 funcion              : 1
 parametros           : 6 8
 print                : 5 11 12
 sentencia            : 0
-sentenciafor         : 50
-sentenciawhile       : 51
+sentenciafor         : 51
+sentenciawhile       : 52
 term                 : 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
-variable             : 15 37 40 52
+variable             : 15 37 40 53
 
 Parsing method: LALR
 
@@ -197,11 +197,12 @@ state 0
     (33) expresion -> . expresion SMALLER_THAN term
     (34) expresion -> . expresion SMALLER_EQUAL term
     (35) expresion -> . term
-    (42) estructura -> . estructuraCondicional
-    (43) estructura -> . estructuraIterativa
+    (43) estructura -> . estructuraCondicional
+    (44) estructura -> . estructuraIterativa
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (16) variable -> . VARIABLE_LOCAL
     (17) variable -> . VARIABLE_INSTANCE
     (18) variable -> . VARIABLE_CLASS
@@ -210,14 +211,14 @@ state 0
     (36) term -> . NUMBER
     (37) term -> . variable
     (38) term -> . L_PAREN expresion R_PAREN
-    (44) estructuraCondicional -> . estructuraif END
-    (45) estructuraCondicional -> . estructuraif estructuraelse END
-    (46) estructuraCondicional -> . estructuraif estructuraelseif END
-    (50) estructuraIterativa -> . sentenciafor END
-    (51) estructuraIterativa -> . sentenciawhile END
-    (47) estructuraif -> . IF expresion cuerpo
-    (52) sentenciafor -> . FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
-    (53) sentenciawhile -> . WHILE expresion cuerpo
+    (45) estructuraCondicional -> . estructuraif END
+    (46) estructuraCondicional -> . estructuraif estructuraelse END
+    (47) estructuraCondicional -> . estructuraif estructuraelseif END
+    (51) estructuraIterativa -> . sentenciafor END
+    (52) estructuraIterativa -> . sentenciawhile END
+    (48) estructuraif -> . IF expresion cuerpo
+    (53) sentenciafor -> . FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+    (54) sentenciawhile -> . WHILE expresion cuerpo
 
     DEF             shift and go to state 7
     PUTS            shift and go to state 14
@@ -465,16 +466,16 @@ state 11
 
 state 12
 
-    (42) estructura -> estructuraCondicional .
+    (43) estructura -> estructuraCondicional .
 
-    $end            reduce using rule 42 (estructura -> estructuraCondicional .)
+    $end            reduce using rule 43 (estructura -> estructuraCondicional .)
 
 
 state 13
 
-    (43) estructura -> estructuraIterativa .
+    (44) estructura -> estructuraIterativa .
 
-    $end            reduce using rule 43 (estructura -> estructuraIterativa .)
+    $end            reduce using rule 44 (estructura -> estructuraIterativa .)
 
 
 state 14
@@ -482,8 +483,10 @@ state 14
     (39) print -> PUTS . L_PAREN expresion R_PAREN
     (40) print -> PUTS . L_PAREN variable R_PAREN
     (41) print -> PUTS . L_PAREN R_PAREN
+    (42) print -> PUTS . QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
 
     L_PAREN         shift and go to state 44
+    QUOTATION_MARK  shift and go to state 45
 
 
 state 15
@@ -661,36 +664,36 @@ state 19
 
 state 20
 
-    (44) estructuraCondicional -> estructuraif . END
-    (45) estructuraCondicional -> estructuraif . estructuraelse END
-    (46) estructuraCondicional -> estructuraif . estructuraelseif END
-    (49) estructuraelse -> . ELSE cuerpo
-    (48) estructuraelseif -> . ELSIF expresion cuerpo
+    (45) estructuraCondicional -> estructuraif . END
+    (46) estructuraCondicional -> estructuraif . estructuraelse END
+    (47) estructuraCondicional -> estructuraif . estructuraelseif END
+    (50) estructuraelse -> . ELSE cuerpo
+    (49) estructuraelseif -> . ELSIF expresion cuerpo
 
-    END             shift and go to state 45
-    ELSE            shift and go to state 48
-    ELSIF           shift and go to state 49
+    END             shift and go to state 46
+    ELSE            shift and go to state 49
+    ELSIF           shift and go to state 50
 
-    estructuraelse                 shift and go to state 46
-    estructuraelseif               shift and go to state 47
+    estructuraelse                 shift and go to state 47
+    estructuraelseif               shift and go to state 48
 
 state 21
 
-    (50) estructuraIterativa -> sentenciafor . END
-
-    END             shift and go to state 50
-
-
-state 22
-
-    (51) estructuraIterativa -> sentenciawhile . END
+    (51) estructuraIterativa -> sentenciafor . END
 
     END             shift and go to state 51
 
 
+state 22
+
+    (52) estructuraIterativa -> sentenciawhile . END
+
+    END             shift and go to state 52
+
+
 state 23
 
-    (47) estructuraif -> IF . expresion cuerpo
+    (48) estructuraif -> IF . expresion cuerpo
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -723,13 +726,13 @@ state 23
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    expresion                      shift and go to state 52
+    expresion                      shift and go to state 53
     term                           shift and go to state 11
     variable                       shift and go to state 42
 
 state 24
 
-    (52) sentenciafor -> FOR . variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+    (53) sentenciafor -> FOR . variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
     (16) variable -> . VARIABLE_LOCAL
     (17) variable -> . VARIABLE_INSTANCE
     (18) variable -> . VARIABLE_CLASS
@@ -742,11 +745,11 @@ state 24
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    variable                       shift and go to state 53
+    variable                       shift and go to state 54
 
 state 25
 
-    (53) sentenciawhile -> WHILE . expresion cuerpo
+    (54) sentenciawhile -> WHILE . expresion cuerpo
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -779,7 +782,7 @@ state 25
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    expresion                      shift and go to state 54
+    expresion                      shift and go to state 55
     term                           shift and go to state 11
     variable                       shift and go to state 42
 
@@ -803,7 +806,7 @@ state 26
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 55
+    term                           shift and go to state 56
     variable                       shift and go to state 42
 
 state 27
@@ -826,7 +829,7 @@ state 27
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 56
+    term                           shift and go to state 57
     variable                       shift and go to state 42
 
 state 28
@@ -849,7 +852,7 @@ state 28
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 57
+    term                           shift and go to state 58
     variable                       shift and go to state 42
 
 state 29
@@ -872,7 +875,7 @@ state 29
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 58
+    term                           shift and go to state 59
     variable                       shift and go to state 42
 
 state 30
@@ -895,7 +898,7 @@ state 30
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 59
+    term                           shift and go to state 60
     variable                       shift and go to state 42
 
 state 31
@@ -918,7 +921,7 @@ state 31
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 60
+    term                           shift and go to state 61
     variable                       shift and go to state 42
 
 state 32
@@ -941,7 +944,7 @@ state 32
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 61
+    term                           shift and go to state 62
     variable                       shift and go to state 42
 
 state 33
@@ -964,7 +967,7 @@ state 33
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 62
+    term                           shift and go to state 63
     variable                       shift and go to state 42
 
 state 34
@@ -987,7 +990,7 @@ state 34
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 63
+    term                           shift and go to state 64
     variable                       shift and go to state 42
 
 state 35
@@ -1010,7 +1013,7 @@ state 35
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 64
+    term                           shift and go to state 65
     variable                       shift and go to state 42
 
 state 36
@@ -1033,7 +1036,7 @@ state 36
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 65
+    term                           shift and go to state 66
     variable                       shift and go to state 42
 
 state 37
@@ -1056,7 +1059,7 @@ state 37
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 66
+    term                           shift and go to state 67
     variable                       shift and go to state 42
 
 state 38
@@ -1079,7 +1082,7 @@ state 38
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 67
+    term                           shift and go to state 68
     variable                       shift and go to state 42
 
 state 39
@@ -1102,14 +1105,14 @@ state 39
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    term                           shift and go to state 68
+    term                           shift and go to state 69
     variable                       shift and go to state 42
 
 state 40
 
     (6) funcion -> DEF VARIABLE_LOCAL . L_PAREN parametros R_PAREN cuerpo END
 
-    L_PAREN         shift and go to state 69
+    L_PAREN         shift and go to state 70
 
 
 state 41
@@ -1130,7 +1133,7 @@ state 41
     (33) expresion -> expresion . SMALLER_THAN term
     (34) expresion -> expresion . SMALLER_EQUAL term
 
-    R_PAREN         shift and go to state 70
+    R_PAREN         shift and go to state 71
     PLUS            shift and go to state 26
     MINUS           shift and go to state 27
     MULTIPLICATION  shift and go to state 28
@@ -1216,7 +1219,7 @@ state 43
     CONSTANT        shift and go to state 18
 
     variable                       shift and go to state 42
-    expresion                      shift and go to state 71
+    expresion                      shift and go to state 72
     term                           shift and go to state 11
 
 state 44
@@ -1248,7 +1251,7 @@ state 44
     (37) term -> . variable
     (38) term -> . L_PAREN expresion R_PAREN
 
-    R_PAREN         shift and go to state 73
+    R_PAREN         shift and go to state 74
     VARIABLE_LOCAL  shift and go to state 8
     VARIABLE_INSTANCE shift and go to state 15
     VARIABLE_CLASS  shift and go to state 16
@@ -1257,34 +1260,41 @@ state 44
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    expresion                      shift and go to state 72
-    variable                       shift and go to state 74
+    expresion                      shift and go to state 73
+    variable                       shift and go to state 75
     term                           shift and go to state 11
 
 state 45
 
-    (44) estructuraCondicional -> estructuraif END .
+    (42) print -> PUTS QUOTATION_MARK . VARIABLE_LOCAL QUOTATION_MARK
 
-    $end            reduce using rule 44 (estructuraCondicional -> estructuraif END .)
+    VARIABLE_LOCAL  shift and go to state 76
 
 
 state 46
 
-    (45) estructuraCondicional -> estructuraif estructuraelse . END
+    (45) estructuraCondicional -> estructuraif END .
 
-    END             shift and go to state 75
+    $end            reduce using rule 45 (estructuraCondicional -> estructuraif END .)
 
 
 state 47
 
-    (46) estructuraCondicional -> estructuraif estructuraelseif . END
+    (46) estructuraCondicional -> estructuraif estructuraelse . END
 
-    END             shift and go to state 76
+    END             shift and go to state 77
 
 
 state 48
 
-    (49) estructuraelse -> ELSE . cuerpo
+    (47) estructuraCondicional -> estructuraif estructuraelseif . END
+
+    END             shift and go to state 78
+
+
+state 49
+
+    (50) estructuraelse -> ELSE . cuerpo
     (9) cuerpo -> . declaracion
     (10) cuerpo -> . declaracion cuerpo
     (11) cuerpo -> . print
@@ -1295,6 +1305,7 @@ state 48
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -1328,16 +1339,16 @@ state 48
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    cuerpo                         shift and go to state 77
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
-    expresion                      shift and go to state 80
+    cuerpo                         shift and go to state 79
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
+    expresion                      shift and go to state 82
     variable                       shift and go to state 10
     term                           shift and go to state 11
 
-state 49
+state 50
 
-    (48) estructuraelseif -> ELSIF . expresion cuerpo
+    (49) estructuraelseif -> ELSIF . expresion cuerpo
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -1370,115 +1381,27 @@ state 49
     VARIABLE_GLOBAL shift and go to state 17
     CONSTANT        shift and go to state 18
 
-    expresion                      shift and go to state 81
+    expresion                      shift and go to state 83
     term                           shift and go to state 11
     variable                       shift and go to state 42
 
-state 50
-
-    (50) estructuraIterativa -> sentenciafor END .
-
-    $end            reduce using rule 50 (estructuraIterativa -> sentenciafor END .)
-
-
 state 51
 
-    (51) estructuraIterativa -> sentenciawhile END .
+    (51) estructuraIterativa -> sentenciafor END .
 
-    $end            reduce using rule 51 (estructuraIterativa -> sentenciawhile END .)
+    $end            reduce using rule 51 (estructuraIterativa -> sentenciafor END .)
 
 
 state 52
 
-    (47) estructuraif -> IF expresion . cuerpo
-    (21) expresion -> expresion . PLUS term
-    (22) expresion -> expresion . MINUS term
-    (23) expresion -> expresion . MULTIPLICATION term
-    (24) expresion -> expresion . DIVIDE term
-    (25) expresion -> expresion . EXPONENT term
-    (26) expresion -> expresion . MODULE term
-    (27) expresion -> expresion . AND_LOGIC term
-    (28) expresion -> expresion . OR_LOGIC term
-    (29) expresion -> expresion . EQUALITY term
-    (30) expresion -> expresion . EQUALITY_OF_CASE term
-    (31) expresion -> expresion . GREATER_EQUAL term
-    (32) expresion -> expresion . GREATER_THAN term
-    (33) expresion -> expresion . SMALLER_THAN term
-    (34) expresion -> expresion . SMALLER_EQUAL term
-    (9) cuerpo -> . declaracion
-    (10) cuerpo -> . declaracion cuerpo
-    (11) cuerpo -> . print
-    (12) cuerpo -> . print cuerpo
-    (13) cuerpo -> . expresion
-    (14) cuerpo -> . expresion cuerpo
-    (15) declaracion -> . variable EQUAL expresion
-    (39) print -> . PUTS L_PAREN expresion R_PAREN
-    (40) print -> . PUTS L_PAREN variable R_PAREN
-    (41) print -> . PUTS L_PAREN R_PAREN
-    (21) expresion -> . expresion PLUS term
-    (22) expresion -> . expresion MINUS term
-    (23) expresion -> . expresion MULTIPLICATION term
-    (24) expresion -> . expresion DIVIDE term
-    (25) expresion -> . expresion EXPONENT term
-    (26) expresion -> . expresion MODULE term
-    (27) expresion -> . expresion AND_LOGIC term
-    (28) expresion -> . expresion OR_LOGIC term
-    (29) expresion -> . expresion EQUALITY term
-    (30) expresion -> . expresion EQUALITY_OF_CASE term
-    (31) expresion -> . expresion GREATER_EQUAL term
-    (32) expresion -> . expresion GREATER_THAN term
-    (33) expresion -> . expresion SMALLER_THAN term
-    (34) expresion -> . expresion SMALLER_EQUAL term
-    (35) expresion -> . term
-    (16) variable -> . VARIABLE_LOCAL
-    (17) variable -> . VARIABLE_INSTANCE
-    (18) variable -> . VARIABLE_CLASS
-    (19) variable -> . VARIABLE_GLOBAL
-    (20) variable -> . CONSTANT
-    (36) term -> . NUMBER
-    (37) term -> . variable
-    (38) term -> . L_PAREN expresion R_PAREN
+    (52) estructuraIterativa -> sentenciawhile END .
 
-    PLUS            shift and go to state 26
-    MINUS           shift and go to state 27
-    MULTIPLICATION  shift and go to state 28
-    DIVIDE          shift and go to state 29
-    EXPONENT        shift and go to state 30
-    MODULE          shift and go to state 31
-    AND_LOGIC       shift and go to state 32
-    OR_LOGIC        shift and go to state 33
-    EQUALITY        shift and go to state 34
-    EQUALITY_OF_CASE shift and go to state 35
-    GREATER_EQUAL   shift and go to state 36
-    GREATER_THAN    shift and go to state 37
-    SMALLER_THAN    shift and go to state 38
-    SMALLER_EQUAL   shift and go to state 39
-    PUTS            shift and go to state 14
-    VARIABLE_LOCAL  shift and go to state 8
-    VARIABLE_INSTANCE shift and go to state 15
-    VARIABLE_CLASS  shift and go to state 16
-    VARIABLE_GLOBAL shift and go to state 17
-    CONSTANT        shift and go to state 18
-    NUMBER          shift and go to state 19
-    L_PAREN         shift and go to state 9
+    $end            reduce using rule 52 (estructuraIterativa -> sentenciawhile END .)
 
-    expresion                      shift and go to state 80
-    cuerpo                         shift and go to state 82
-    term                           shift and go to state 11
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
-    variable                       shift and go to state 10
 
 state 53
 
-    (52) sentenciafor -> FOR variable . IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
-
-    IN              shift and go to state 83
-
-
-state 54
-
-    (53) sentenciawhile -> WHILE expresion . cuerpo
+    (48) estructuraif -> IF expresion . cuerpo
     (21) expresion -> expresion . PLUS term
     (22) expresion -> expresion . MINUS term
     (23) expresion -> expresion . MULTIPLICATION term
@@ -1503,6 +1426,7 @@ state 54
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -1550,14 +1474,103 @@ state 54
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    expresion                      shift and go to state 80
+    expresion                      shift and go to state 82
     cuerpo                         shift and go to state 84
     term                           shift and go to state 11
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
     variable                       shift and go to state 10
 
+state 54
+
+    (53) sentenciafor -> FOR variable . IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+
+    IN              shift and go to state 85
+
+
 state 55
+
+    (54) sentenciawhile -> WHILE expresion . cuerpo
+    (21) expresion -> expresion . PLUS term
+    (22) expresion -> expresion . MINUS term
+    (23) expresion -> expresion . MULTIPLICATION term
+    (24) expresion -> expresion . DIVIDE term
+    (25) expresion -> expresion . EXPONENT term
+    (26) expresion -> expresion . MODULE term
+    (27) expresion -> expresion . AND_LOGIC term
+    (28) expresion -> expresion . OR_LOGIC term
+    (29) expresion -> expresion . EQUALITY term
+    (30) expresion -> expresion . EQUALITY_OF_CASE term
+    (31) expresion -> expresion . GREATER_EQUAL term
+    (32) expresion -> expresion . GREATER_THAN term
+    (33) expresion -> expresion . SMALLER_THAN term
+    (34) expresion -> expresion . SMALLER_EQUAL term
+    (9) cuerpo -> . declaracion
+    (10) cuerpo -> . declaracion cuerpo
+    (11) cuerpo -> . print
+    (12) cuerpo -> . print cuerpo
+    (13) cuerpo -> . expresion
+    (14) cuerpo -> . expresion cuerpo
+    (15) declaracion -> . variable EQUAL expresion
+    (39) print -> . PUTS L_PAREN expresion R_PAREN
+    (40) print -> . PUTS L_PAREN variable R_PAREN
+    (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
+    (21) expresion -> . expresion PLUS term
+    (22) expresion -> . expresion MINUS term
+    (23) expresion -> . expresion MULTIPLICATION term
+    (24) expresion -> . expresion DIVIDE term
+    (25) expresion -> . expresion EXPONENT term
+    (26) expresion -> . expresion MODULE term
+    (27) expresion -> . expresion AND_LOGIC term
+    (28) expresion -> . expresion OR_LOGIC term
+    (29) expresion -> . expresion EQUALITY term
+    (30) expresion -> . expresion EQUALITY_OF_CASE term
+    (31) expresion -> . expresion GREATER_EQUAL term
+    (32) expresion -> . expresion GREATER_THAN term
+    (33) expresion -> . expresion SMALLER_THAN term
+    (34) expresion -> . expresion SMALLER_EQUAL term
+    (35) expresion -> . term
+    (16) variable -> . VARIABLE_LOCAL
+    (17) variable -> . VARIABLE_INSTANCE
+    (18) variable -> . VARIABLE_CLASS
+    (19) variable -> . VARIABLE_GLOBAL
+    (20) variable -> . CONSTANT
+    (36) term -> . NUMBER
+    (37) term -> . variable
+    (38) term -> . L_PAREN expresion R_PAREN
+
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 27
+    MULTIPLICATION  shift and go to state 28
+    DIVIDE          shift and go to state 29
+    EXPONENT        shift and go to state 30
+    MODULE          shift and go to state 31
+    AND_LOGIC       shift and go to state 32
+    OR_LOGIC        shift and go to state 33
+    EQUALITY        shift and go to state 34
+    EQUALITY_OF_CASE shift and go to state 35
+    GREATER_EQUAL   shift and go to state 36
+    GREATER_THAN    shift and go to state 37
+    SMALLER_THAN    shift and go to state 38
+    SMALLER_EQUAL   shift and go to state 39
+    PUTS            shift and go to state 14
+    VARIABLE_LOCAL  shift and go to state 8
+    VARIABLE_INSTANCE shift and go to state 15
+    VARIABLE_CLASS  shift and go to state 16
+    VARIABLE_GLOBAL shift and go to state 17
+    CONSTANT        shift and go to state 18
+    NUMBER          shift and go to state 19
+    L_PAREN         shift and go to state 9
+
+    expresion                      shift and go to state 82
+    cuerpo                         shift and go to state 86
+    term                           shift and go to state 11
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
+    variable                       shift and go to state 10
+
+state 56
 
     (21) expresion -> expresion PLUS term .
 
@@ -1590,7 +1603,7 @@ state 55
     ELSIF           reduce using rule 21 (expresion -> expresion PLUS term .)
 
 
-state 56
+state 57
 
     (22) expresion -> expresion MINUS term .
 
@@ -1623,7 +1636,7 @@ state 56
     ELSIF           reduce using rule 22 (expresion -> expresion MINUS term .)
 
 
-state 57
+state 58
 
     (23) expresion -> expresion MULTIPLICATION term .
 
@@ -1656,7 +1669,7 @@ state 57
     ELSIF           reduce using rule 23 (expresion -> expresion MULTIPLICATION term .)
 
 
-state 58
+state 59
 
     (24) expresion -> expresion DIVIDE term .
 
@@ -1689,7 +1702,7 @@ state 58
     ELSIF           reduce using rule 24 (expresion -> expresion DIVIDE term .)
 
 
-state 59
+state 60
 
     (25) expresion -> expresion EXPONENT term .
 
@@ -1722,7 +1735,7 @@ state 59
     ELSIF           reduce using rule 25 (expresion -> expresion EXPONENT term .)
 
 
-state 60
+state 61
 
     (26) expresion -> expresion MODULE term .
 
@@ -1755,7 +1768,7 @@ state 60
     ELSIF           reduce using rule 26 (expresion -> expresion MODULE term .)
 
 
-state 61
+state 62
 
     (27) expresion -> expresion AND_LOGIC term .
 
@@ -1788,7 +1801,7 @@ state 61
     ELSIF           reduce using rule 27 (expresion -> expresion AND_LOGIC term .)
 
 
-state 62
+state 63
 
     (28) expresion -> expresion OR_LOGIC term .
 
@@ -1821,7 +1834,7 @@ state 62
     ELSIF           reduce using rule 28 (expresion -> expresion OR_LOGIC term .)
 
 
-state 63
+state 64
 
     (29) expresion -> expresion EQUALITY term .
 
@@ -1854,7 +1867,7 @@ state 63
     ELSIF           reduce using rule 29 (expresion -> expresion EQUALITY term .)
 
 
-state 64
+state 65
 
     (30) expresion -> expresion EQUALITY_OF_CASE term .
 
@@ -1887,7 +1900,7 @@ state 64
     ELSIF           reduce using rule 30 (expresion -> expresion EQUALITY_OF_CASE term .)
 
 
-state 65
+state 66
 
     (31) expresion -> expresion GREATER_EQUAL term .
 
@@ -1920,7 +1933,7 @@ state 65
     ELSIF           reduce using rule 31 (expresion -> expresion GREATER_EQUAL term .)
 
 
-state 66
+state 67
 
     (32) expresion -> expresion GREATER_THAN term .
 
@@ -1953,7 +1966,7 @@ state 66
     ELSIF           reduce using rule 32 (expresion -> expresion GREATER_THAN term .)
 
 
-state 67
+state 68
 
     (33) expresion -> expresion SMALLER_THAN term .
 
@@ -1986,7 +1999,7 @@ state 67
     ELSIF           reduce using rule 33 (expresion -> expresion SMALLER_THAN term .)
 
 
-state 68
+state 69
 
     (34) expresion -> expresion SMALLER_EQUAL term .
 
@@ -2019,17 +2032,17 @@ state 68
     ELSIF           reduce using rule 34 (expresion -> expresion SMALLER_EQUAL term .)
 
 
-state 69
+state 70
 
     (6) funcion -> DEF VARIABLE_LOCAL L_PAREN . parametros R_PAREN cuerpo END
     (7) parametros -> . VARIABLE_LOCAL
     (8) parametros -> . VARIABLE_LOCAL COMMA parametros
 
-    VARIABLE_LOCAL  shift and go to state 85
+    VARIABLE_LOCAL  shift and go to state 87
 
-    parametros                     shift and go to state 86
+    parametros                     shift and go to state 88
 
-state 70
+state 71
 
     (38) term -> L_PAREN expresion R_PAREN .
 
@@ -2062,7 +2075,7 @@ state 70
     ELSIF           reduce using rule 38 (term -> L_PAREN expresion R_PAREN .)
 
 
-state 71
+state 72
 
     (15) declaracion -> variable EQUAL expresion .
     (21) expresion -> expresion . PLUS term
@@ -2108,7 +2121,7 @@ state 71
     SMALLER_EQUAL   shift and go to state 39
 
 
-state 72
+state 73
 
     (39) print -> PUTS L_PAREN expresion . R_PAREN
     (21) expresion -> expresion . PLUS term
@@ -2126,7 +2139,7 @@ state 72
     (33) expresion -> expresion . SMALLER_THAN term
     (34) expresion -> expresion . SMALLER_EQUAL term
 
-    R_PAREN         shift and go to state 87
+    R_PAREN         shift and go to state 89
     PLUS            shift and go to state 26
     MINUS           shift and go to state 27
     MULTIPLICATION  shift and go to state 28
@@ -2143,7 +2156,7 @@ state 72
     SMALLER_EQUAL   shift and go to state 39
 
 
-state 73
+state 74
 
     (41) print -> PUTS L_PAREN R_PAREN .
 
@@ -2161,13 +2174,13 @@ state 73
     ELSIF           reduce using rule 41 (print -> PUTS L_PAREN R_PAREN .)
 
 
-state 74
+state 75
 
     (40) print -> PUTS L_PAREN variable . R_PAREN
     (37) term -> variable .
 
   ! shift/reduce conflict for R_PAREN resolved as shift
-    R_PAREN         shift and go to state 88
+    R_PAREN         shift and go to state 90
     PLUS            reduce using rule 37 (term -> variable .)
     MINUS           reduce using rule 37 (term -> variable .)
     MULTIPLICATION  reduce using rule 37 (term -> variable .)
@@ -2186,28 +2199,35 @@ state 74
   ! R_PAREN         [ reduce using rule 37 (term -> variable .) ]
 
 
-state 75
-
-    (45) estructuraCondicional -> estructuraif estructuraelse END .
-
-    $end            reduce using rule 45 (estructuraCondicional -> estructuraif estructuraelse END .)
-
-
 state 76
 
-    (46) estructuraCondicional -> estructuraif estructuraelseif END .
+    (42) print -> PUTS QUOTATION_MARK VARIABLE_LOCAL . QUOTATION_MARK
 
-    $end            reduce using rule 46 (estructuraCondicional -> estructuraif estructuraelseif END .)
+    QUOTATION_MARK  shift and go to state 91
 
 
 state 77
 
-    (49) estructuraelse -> ELSE cuerpo .
+    (46) estructuraCondicional -> estructuraif estructuraelse END .
 
-    END             reduce using rule 49 (estructuraelse -> ELSE cuerpo .)
+    $end            reduce using rule 46 (estructuraCondicional -> estructuraif estructuraelse END .)
 
 
 state 78
+
+    (47) estructuraCondicional -> estructuraif estructuraelseif END .
+
+    $end            reduce using rule 47 (estructuraCondicional -> estructuraif estructuraelseif END .)
+
+
+state 79
+
+    (50) estructuraelse -> ELSE cuerpo .
+
+    END             reduce using rule 50 (estructuraelse -> ELSE cuerpo .)
+
+
+state 80
 
     (9) cuerpo -> declaracion .
     (10) cuerpo -> declaracion . cuerpo
@@ -2221,6 +2241,7 @@ state 78
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2257,14 +2278,14 @@ state 78
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    declaracion                    shift and go to state 78
-    cuerpo                         shift and go to state 89
-    print                          shift and go to state 79
-    expresion                      shift and go to state 80
+    declaracion                    shift and go to state 80
+    cuerpo                         shift and go to state 92
+    print                          shift and go to state 81
+    expresion                      shift and go to state 82
     variable                       shift and go to state 10
     term                           shift and go to state 11
 
-state 79
+state 81
 
     (11) cuerpo -> print .
     (12) cuerpo -> print . cuerpo
@@ -2278,6 +2299,7 @@ state 79
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2314,14 +2336,14 @@ state 79
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    print                          shift and go to state 79
-    cuerpo                         shift and go to state 90
-    declaracion                    shift and go to state 78
-    expresion                      shift and go to state 80
+    print                          shift and go to state 81
+    cuerpo                         shift and go to state 93
+    declaracion                    shift and go to state 80
+    expresion                      shift and go to state 82
     variable                       shift and go to state 10
     term                           shift and go to state 11
 
-state 80
+state 82
 
     (13) cuerpo -> expresion .
     (14) cuerpo -> expresion . cuerpo
@@ -2349,6 +2371,7 @@ state 80
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2399,16 +2422,16 @@ state 80
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    expresion                      shift and go to state 80
-    cuerpo                         shift and go to state 91
+    expresion                      shift and go to state 82
+    cuerpo                         shift and go to state 94
     term                           shift and go to state 11
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
     variable                       shift and go to state 10
 
-state 81
+state 83
 
-    (48) estructuraelseif -> ELSIF expresion . cuerpo
+    (49) estructuraelseif -> ELSIF expresion . cuerpo
     (21) expresion -> expresion . PLUS term
     (22) expresion -> expresion . MINUS term
     (23) expresion -> expresion . MULTIPLICATION term
@@ -2433,6 +2456,7 @@ state 81
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2480,53 +2504,53 @@ state 81
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    expresion                      shift and go to state 80
-    cuerpo                         shift and go to state 92
+    expresion                      shift and go to state 82
+    cuerpo                         shift and go to state 95
     term                           shift and go to state 11
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
     variable                       shift and go to state 10
-
-state 82
-
-    (47) estructuraif -> IF expresion cuerpo .
-
-    END             reduce using rule 47 (estructuraif -> IF expresion cuerpo .)
-    ELSE            reduce using rule 47 (estructuraif -> IF expresion cuerpo .)
-    ELSIF           reduce using rule 47 (estructuraif -> IF expresion cuerpo .)
-
-
-state 83
-
-    (52) sentenciafor -> FOR variable IN . L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
-
-    L_PAREN         shift and go to state 93
-
 
 state 84
 
-    (53) sentenciawhile -> WHILE expresion cuerpo .
+    (48) estructuraif -> IF expresion cuerpo .
 
-    END             reduce using rule 53 (sentenciawhile -> WHILE expresion cuerpo .)
+    END             reduce using rule 48 (estructuraif -> IF expresion cuerpo .)
+    ELSE            reduce using rule 48 (estructuraif -> IF expresion cuerpo .)
+    ELSIF           reduce using rule 48 (estructuraif -> IF expresion cuerpo .)
 
 
 state 85
+
+    (53) sentenciafor -> FOR variable IN . L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+
+    L_PAREN         shift and go to state 96
+
+
+state 86
+
+    (54) sentenciawhile -> WHILE expresion cuerpo .
+
+    END             reduce using rule 54 (sentenciawhile -> WHILE expresion cuerpo .)
+
+
+state 87
 
     (7) parametros -> VARIABLE_LOCAL .
     (8) parametros -> VARIABLE_LOCAL . COMMA parametros
 
     R_PAREN         reduce using rule 7 (parametros -> VARIABLE_LOCAL .)
-    COMMA           shift and go to state 94
+    COMMA           shift and go to state 97
 
 
-state 86
+state 88
 
     (6) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros . R_PAREN cuerpo END
 
-    R_PAREN         shift and go to state 95
+    R_PAREN         shift and go to state 98
 
 
-state 87
+state 89
 
     (39) print -> PUTS L_PAREN expresion R_PAREN .
 
@@ -2544,7 +2568,7 @@ state 87
     ELSIF           reduce using rule 39 (print -> PUTS L_PAREN expresion R_PAREN .)
 
 
-state 88
+state 90
 
     (40) print -> PUTS L_PAREN variable R_PAREN .
 
@@ -2562,7 +2586,25 @@ state 88
     ELSIF           reduce using rule 40 (print -> PUTS L_PAREN variable R_PAREN .)
 
 
-state 89
+state 91
+
+    (42) print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .
+
+    $end            reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    PUTS            reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    VARIABLE_LOCAL  reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    VARIABLE_INSTANCE reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    VARIABLE_CLASS  reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    VARIABLE_GLOBAL reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    CONSTANT        reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    NUMBER          reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    L_PAREN         reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    END             reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    ELSE            reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+    ELSIF           reduce using rule 42 (print -> PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK .)
+
+
+state 92
 
     (10) cuerpo -> declaracion cuerpo .
 
@@ -2571,7 +2613,7 @@ state 89
     ELSIF           reduce using rule 10 (cuerpo -> declaracion cuerpo .)
 
 
-state 90
+state 93
 
     (12) cuerpo -> print cuerpo .
 
@@ -2580,7 +2622,7 @@ state 90
     ELSIF           reduce using rule 12 (cuerpo -> print cuerpo .)
 
 
-state 91
+state 94
 
     (14) cuerpo -> expresion cuerpo .
 
@@ -2589,31 +2631,31 @@ state 91
     ELSIF           reduce using rule 14 (cuerpo -> expresion cuerpo .)
 
 
-state 92
+state 95
 
-    (48) estructuraelseif -> ELSIF expresion cuerpo .
+    (49) estructuraelseif -> ELSIF expresion cuerpo .
 
-    END             reduce using rule 48 (estructuraelseif -> ELSIF expresion cuerpo .)
-
-
-state 93
-
-    (52) sentenciafor -> FOR variable IN L_PAREN . NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
-
-    NUMBER          shift and go to state 96
+    END             reduce using rule 49 (estructuraelseif -> ELSIF expresion cuerpo .)
 
 
-state 94
+state 96
+
+    (53) sentenciafor -> FOR variable IN L_PAREN . NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo
+
+    NUMBER          shift and go to state 99
+
+
+state 97
 
     (8) parametros -> VARIABLE_LOCAL COMMA . parametros
     (7) parametros -> . VARIABLE_LOCAL
     (8) parametros -> . VARIABLE_LOCAL COMMA parametros
 
-    VARIABLE_LOCAL  shift and go to state 85
+    VARIABLE_LOCAL  shift and go to state 87
 
-    parametros                     shift and go to state 97
+    parametros                     shift and go to state 100
 
-state 95
+state 98
 
     (6) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN . cuerpo END
     (9) cuerpo -> . declaracion
@@ -2626,6 +2668,7 @@ state 95
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2659,58 +2702,58 @@ state 95
     NUMBER          shift and go to state 19
     L_PAREN         shift and go to state 9
 
-    cuerpo                         shift and go to state 98
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
-    expresion                      shift and go to state 80
+    cuerpo                         shift and go to state 101
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
+    expresion                      shift and go to state 82
     variable                       shift and go to state 10
     term                           shift and go to state 11
 
-state 96
+state 99
 
-    (52) sentenciafor -> FOR variable IN L_PAREN NUMBER . DOUBLE_POINT NUMBER R_PAREN cuerpo
+    (53) sentenciafor -> FOR variable IN L_PAREN NUMBER . DOUBLE_POINT NUMBER R_PAREN cuerpo
 
-    DOUBLE_POINT    shift and go to state 99
+    DOUBLE_POINT    shift and go to state 102
 
 
-state 97
+state 100
 
     (8) parametros -> VARIABLE_LOCAL COMMA parametros .
 
     R_PAREN         reduce using rule 8 (parametros -> VARIABLE_LOCAL COMMA parametros .)
 
 
-state 98
+state 101
 
     (6) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo . END
 
-    END             shift and go to state 100
+    END             shift and go to state 103
 
 
-state 99
+state 102
 
-    (52) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT . NUMBER R_PAREN cuerpo
+    (53) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT . NUMBER R_PAREN cuerpo
 
-    NUMBER          shift and go to state 101
+    NUMBER          shift and go to state 104
 
 
-state 100
+state 103
 
     (6) funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END .
 
     $end            reduce using rule 6 (funcion -> DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END .)
 
 
-state 101
+state 104
 
-    (52) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER . R_PAREN cuerpo
+    (53) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER . R_PAREN cuerpo
 
-    R_PAREN         shift and go to state 102
+    R_PAREN         shift and go to state 105
 
 
-state 102
+state 105
 
-    (52) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN . cuerpo
+    (53) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN . cuerpo
     (9) cuerpo -> . declaracion
     (10) cuerpo -> . declaracion cuerpo
     (11) cuerpo -> . print
@@ -2721,6 +2764,7 @@ state 102
     (39) print -> . PUTS L_PAREN expresion R_PAREN
     (40) print -> . PUTS L_PAREN variable R_PAREN
     (41) print -> . PUTS L_PAREN R_PAREN
+    (42) print -> . PUTS QUOTATION_MARK VARIABLE_LOCAL QUOTATION_MARK
     (21) expresion -> . expresion PLUS term
     (22) expresion -> . expresion MINUS term
     (23) expresion -> . expresion MULTIPLICATION term
@@ -2755,19 +2799,19 @@ state 102
     L_PAREN         shift and go to state 9
 
     variable                       shift and go to state 10
-    cuerpo                         shift and go to state 103
-    declaracion                    shift and go to state 78
-    print                          shift and go to state 79
-    expresion                      shift and go to state 80
+    cuerpo                         shift and go to state 106
+    declaracion                    shift and go to state 80
+    print                          shift and go to state 81
+    expresion                      shift and go to state 82
     term                           shift and go to state 11
 
-state 103
+state 106
 
-    (52) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo .
+    (53) sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo .
 
-    END             reduce using rule 52 (sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo .)
+    END             reduce using rule 53 (sentenciafor -> FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for R_PAREN in state 74 resolved as shift
+WARNING: shift/reduce conflict for R_PAREN in state 75 resolved as shift
