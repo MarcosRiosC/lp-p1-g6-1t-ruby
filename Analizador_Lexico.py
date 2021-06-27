@@ -139,9 +139,13 @@ def t_VARIABLE_GLOBAL(t):
     t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
     return t
 
-def t_COMMENT(t):
-    r'\#.*'
-    pass
+#ef t_COMMENT(t):
+#    r'\^#.*'
+#    pass
+
+def t_STRING(t):
+    r'\'[a-z\s]*(\')'
+    return t
 # end Katiuska Marín S.
 
 # De aquí en adelante el código fue reciclado de la práctica en clases.
