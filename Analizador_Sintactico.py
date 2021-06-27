@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 from Analizador_Lexico import tokens
 
-#AQUÍ EMPIEZA MI TRABAJO - AARÓN REYES
+#AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 #REGLA PADRE
 def p_sentencia(p):
     '''sentencia : funcion
@@ -86,7 +86,7 @@ def p_print_vac(p):
     'print : PUTS L_PAREN R_PAREN'
 ##def p_print_str(p):
 ##    'print : PUTS L_PAREN STRING R_PAREN'''
-#AQUÍ TERMINA MI TRABAJO - AARÓN REYES
+#AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
 def p_estructura(p):
@@ -121,7 +121,7 @@ def p_sentenciawhile(p):
 
 #AQUÍ TERMINA KATIUSKA MARÍN
 
-#AQUÍ EMPIEZA MI TRABAJO - AARÓN REYES
+#DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
 #EVALUADOR DE ERRORES
 def p_error(p):
     if p:
@@ -141,4 +141,3 @@ while True:
     if not s: continue
     result = parser.parse(s)
     print(result)
-#AQUÍ TERMINA MI TRABAJO - AARÓN REYES
