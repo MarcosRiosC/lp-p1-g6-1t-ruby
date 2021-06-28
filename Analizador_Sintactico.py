@@ -8,7 +8,8 @@ def p_sentencia(p):
                 | declaracion
                 | expresion
                 | estructura
-                | print'''
+                | print
+                '''
 
 
 #FUNCION
@@ -27,9 +28,11 @@ def p_cuerpo(p):
     '''
 
 
-#ASIGNACION
+#DECLARACION
 def p_declaracion(p):
     'declaracion : variable EQUAL expresion'
+def p_declaracion_gets(p):
+    'declaracion : variable EQUAL GETS'
 def p_variable(p):
     '''variable : VARIABLE_LOCAL
             | VARIABLE_INSTANCE
@@ -71,6 +74,8 @@ def p_expresion_term(p):
     'expresion : term'
 def p_term_number(p):
     'term : NUMBER'
+def p_term_float(p):
+    'term : FLOAT'
 def p_term_var(p):
     'term : variable'
 def p_term_expr(p):

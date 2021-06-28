@@ -31,6 +31,7 @@ reserved = {
     'until' : 'UNTIL',
     'when' : 'WHEN',
     'while' : 'WHILE',
+    'gets' : 'GETS'
 }
 
 # Tupla de tokens
@@ -69,7 +70,8 @@ tokens = (
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
     'CONSTANT',
-    'STRING'
+    'STRING',
+    'FLOAT'
 ) + tuple(reserved.values())
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
@@ -103,19 +105,26 @@ t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
 t_COMMA = r'\,'
 t_DOUBLE_QUOTE = r'"'
-t_DOUBLE_POINT = r'\..'
+t_DOUBLE_POINT = r'\.\.'
 t_ignore = ' \t'
+
+def t_float(t):
+    r'[0-9]+\.[0-9]+'
+    t.type = reserved.get(t.value, 'FLOAT')
+    return t
 
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
+
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
 # Expreciones que definen una variable
 def t_VARIABLE_LOCAL(t):
-    r'[a-z_][a-zA-Z_]+\d*'
+    r'[a-z_][a-zA-Z_]*\d*'
     t.type = reserved.get(t.value, 'VARIABLE_LOCAL')
     return t
 
@@ -139,17 +148,14 @@ def t_VARIABLE_GLOBAL(t):
     t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
     return t
 
-
 def t_COMMENT(t):
     r'\#.*'
     pass
-#AQUÍ TERMINA KATIUSKA MARÍN
-
 
 def t_STRING(t):
     r'\'[a-z\s]*(\')'
     return t
-# end Katiuska Marín S.
+#AQUÍ TERMINA KATIUSKA MARÍN
 
 
 #DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
