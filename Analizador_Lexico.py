@@ -107,9 +107,8 @@ def t_NUMBER(t):
     return t
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
-
+#AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
 # Expreciones que definen una variable
-# start Katiuska Marín S.
 def t_VARIABLE_LOCAL(t):
     r'[a-z_][a-zA-Z_]+\d*'
     t.type = reserved.get(t.value, 'VARIABLE_LOCAL')
@@ -138,9 +137,9 @@ def t_VARIABLE_GLOBAL(t):
 def t_COMMENT(t):
     r'\#.*'
     pass
-# end Katiuska Marín S.
+#AQUÍ TERMINA KATIUSKA MARÍN
 
-# De aquí en adelante el código fue reciclado de la práctica en clases.
+#DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
