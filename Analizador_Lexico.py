@@ -46,6 +46,7 @@ tokens = (
     'GREATER_EQUAL',
     'GREATER_THAN',
     'L_PAREN',
+    'L_SQUARE_BRACKET',
     'MINUS',
     'MODULE',
     'MULTIPLICATION',
@@ -53,6 +54,7 @@ tokens = (
     'NUMBER',
     'OR_LOGIC',
     'PLUS',
+    'R_SQUARE_BRACKET',
     'R_PAREN',
     'SMALLER_THAN',
     'SMALLER_EQUAL',
@@ -66,7 +68,8 @@ tokens = (
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
-    'CONSTANT'
+    'CONSTANT',
+    'STRING'
 ) + tuple(reserved.values())
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
@@ -91,7 +94,9 @@ t_COINCIDENCE = r'=~'
 t_COMPOSITION = r'\|&'
 t_EQUAL = r'\='
 t_L_PAREN = r'\('
+t_L_SQUARE_BRACKET = r'\['
 t_NEGATION = r'!'
+t_R_SQUARE_BRACKET = r'\]'
 t_R_PAREN = r'\)'
 t_QUOTATION_MARK = r'\''
 t_WRENCH_L = r'\{'
@@ -134,10 +139,18 @@ def t_VARIABLE_GLOBAL(t):
     t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
     return t
 
+
 def t_COMMENT(t):
     r'\#.*'
     pass
 #AQUÍ TERMINA KATIUSKA MARÍN
+
+
+def t_STRING(t):
+    r'\'[a-z\s]*(\')'
+    return t
+# end Katiuska Marín S.
+
 
 #DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
 # Define a rule so we can track line numbers
