@@ -68,7 +68,8 @@ tokens = (
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
-    'CONSTANT'
+    'CONSTANT',
+    'STRING'
 ) + tuple(reserved.values())
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
