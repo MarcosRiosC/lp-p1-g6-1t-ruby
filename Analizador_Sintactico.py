@@ -95,7 +95,9 @@ def p_print_str(p):
 
 def p_estructura(p):
     '''estructura : estructuraCondicional
-                    | estructuraIterativa'''
+                    | estructuraIterativa
+                    | estructuraDato
+                    '''
 
 def p_estructuraCondicional(p):
     '''estructuraCondicional : estructuraif END
@@ -124,7 +126,20 @@ def p_sentenciawhile(p):
 
 
 #AQUÍ TERMINA KATIUSKA MARÍN
-
+# marcos rios
+def p_estructuraDato(p):
+    'estructuraDato : estructuraDatoArray'
+def p_estructuraDatoArray(p):
+    '''estructuraDatoArray : variable EQUAL L_SQUARE_BRACKET R_SQUARE_BRACKET
+        | variable EQUAL L_SQUARE_BRACKET arrayContext R_SQUARE_BRACKET
+    '''
+def p_arrayContext(p):
+    '''arrayContext : variable
+        | NUMBER
+        | variable COMMA arrayContext
+        | NUMBER COMMA arrayContext
+    '''
+# marcos rios fin
 
 #DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
 #EVALUADOR DE ERRORES
@@ -138,6 +153,19 @@ def p_error(p):
 
 #CONSTRUCCION DEL PARSER
 parser = yacc.yacc()
+'''
+#aqui hizo marcos
+def evaluar(texto):
+    try:
+        s = texto
+    except EOFError:
+        return ''
+    if not s:
+        return ''
+    result = parser.parse(s)
+    return result
+# aqui finalizo marcos
+'''
 while True:
     try:
         s = input('calc >> ')
