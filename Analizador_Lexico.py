@@ -31,7 +31,9 @@ reserved = {
     'until' : 'UNTIL',
     'when' : 'WHEN',
     'while' : 'WHILE',
-    'gets' : 'GETS'
+    'gets' : 'GETS',
+    'loop' : 'LOOP',
+    'do' : 'DO'
 }
 
 # Tupla de tokens

@@ -25,6 +25,8 @@ def p_cuerpo(p):
             | print cuerpo
             | expresion
             | expresion cuerpo
+            | estructura
+            | estructura cuerpo
     '''
 
 
@@ -120,13 +122,21 @@ def p_estructuraelsif(p):
 def p_estructuraelse(p):
     'estructuraelse : ELSE cuerpo'
 
+#Regla Nueva para sprint 3 (estructuras de control) - Katiuska Marìn
 def p_estructuraSelectCase(p):
     'estructuraSelectCase : CASE variable cuerpoSelectCase estructuraelse END'
 
 def p_cuerpoSelectCase(p):
     '''cuerpoSelectCase : WHEN term expresion
-                        | WHEN term expresion cuerpoSelectCase'''
+                        | WHEN term expresion cuerpoSelectCase
+                        | WHEN term print
+                        | WHEN term print cuerpoSelectCase'''
 
+def p_estructuraDoLoop(p):
+    '''estructuraDoLoop : LOOP DO expresion BREAK END
+                        | LOOP DO expresion print BREAK END'''
+
+#Fin regla nueva Katiuska Marín
 def p_estructuraIterativa(p):
     '''estructuraIterativa : sentenciafor END
                             | sentenciawhile END'''
@@ -142,6 +152,7 @@ def p_sentenciawhile(p):
 # marcos rios
 def p_estructuraDato(p):
     'estructuraDato : estructuraDatoArray'
+
 def p_estructuraDatoArray(p):
     '''estructuraDatoArray : variable EQUAL L_SQUARE_BRACKET R_SQUARE_BRACKET
         | variable EQUAL L_SQUARE_BRACKET arrayContext R_SQUARE_BRACKET
