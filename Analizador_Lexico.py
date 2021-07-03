@@ -100,11 +100,9 @@ t_L_SQUARE_BRACKET = r'\['
 t_NEGATION = r'!'
 t_R_SQUARE_BRACKET = r'\]'
 t_R_PAREN = r'\)'
-t_QUOTATION_MARK = r'\''
 t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
 t_COMMA = r'\,'
-t_DOUBLE_QUOTE = r'"'
 t_DOUBLE_POINT = r'\.\.'
 t_ignore = ' \t'
 
@@ -117,7 +115,6 @@ def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
-
 
 # AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
@@ -153,7 +150,8 @@ def t_COMMENT(t):
     pass
 
 def t_STRING(t):
-    r'\'[a-z\s]*(\')'
+    r'\"[a-zA-Z0-9\s]*\"$'
+    t.type = reserved.get(t.value, 'STRING')
     return t
 #AQUÍ TERMINA KATIUSKA MARÍN
 
@@ -179,11 +177,11 @@ def getTokens(lexer):
             break  # No more input
         print(tok)
 
-'''linea = " "
+linea = " "
 
 while linea != "":
     linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
-print("Succesfull")'''
+print("Succesfull")

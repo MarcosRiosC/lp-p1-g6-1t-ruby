@@ -96,7 +96,8 @@ def p_print_vac(p):
 
 #AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
 def p_print_str(p):
-    'print : PUTS STRING'
+    '''print : PUTS STRING
+            | PUTS L_PAREN STRING R_PAREN'''
 
 def p_estructura(p):
     '''estructura : estructuraCondicional
@@ -107,7 +108,8 @@ def p_estructura(p):
 def p_estructuraCondicional(p):
     '''estructuraCondicional : estructuraif END
                              | estructuraif estructuraelse END
-                             | estructuraif estructuraelseif END'''
+                             | estructuraif estructuraelseif END
+                             | estructuraSelectCase estructuraelse END'''
 
 def p_estructuraif(p):
     'estructuraif : IF expresion cuerpo'
@@ -118,6 +120,12 @@ def p_estructuraelsif(p):
 def p_estructuraelse(p):
     'estructuraelse : ELSE cuerpo'
 
+def p_estructuraSelectCase(p):
+    'estructuraSelectCase : CASE variable cuerpoSelectCase estructuraelse END'
+
+def p_cuerpoSelectCase(p):
+    '''cuerpoSelectCase : WHEN term expresion
+                        | WHEN term expresion cuerpoSelectCase'''
 
 def p_estructuraIterativa(p):
     '''estructuraIterativa : sentenciafor END
