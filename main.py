@@ -23,11 +23,16 @@ class Main:
         txtOutput = scrolledtext.ScrolledText(self.wind, undo=True, height=5)
         txtOutput.pack()
 
-    def evaluar(self, txtEntrada: Text, txtSalida: scrolledtext.ScrolledText):
+    def evaluar(self, txtEntrada: scrolledtext.ScrolledText, txtSalida: scrolledtext.ScrolledText):
         entrada = txtEntrada.get("1.0", END)
-        #salida = analizer.evaluar(entrada)
-        txtSalida.delete()
-        #txtSalida.insert(0, salida)
+        salida = analizer.evaluar(entrada)
+        txtSalida.delete('0.0', END)
+
+        mensaje = 'Works...'
+        if salida:
+            mensaje =str(salida)
+        txtSalida.insert(END, mensaje)
+
 
 
 

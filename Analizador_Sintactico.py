@@ -46,7 +46,7 @@ def p_variable(p):
 
 #EXPRESION
 def p_expresion_aritmetic(p):
-    '''expresion : expresion PLUS term'\
+    '''expresion : expresion PLUS term
                 | expresion MINUS term
                 | expresion MULTIPLICATION term
                 | expresion DIVIDE term'''
@@ -173,13 +173,15 @@ def p_error(p):
     if p:
         print("Syntax error at token", p.type)
         # Just discard the token and tell the parser it's okay.
+        #return "Syntax error at token "+ p.type
     else:
         print("Syntax error at EOF")
+        #return "Syntax error at EOF"
 
 
 #CONSTRUCCION DEL PARSER
 parser = yacc.yacc()
-'''
+
 #aqui hizo marcos
 def evaluar(texto):
     try:
@@ -188,9 +190,14 @@ def evaluar(texto):
         return ''
     if not s:
         return ''
-    result = parser.parse(s)
-    return result
+    try:
+        result = parser.parse(s)
+        return result
+    except Exception as e:
+        return str(e)
+
 # aqui finalizo marcos
+
 '''
 while True:
     try:
@@ -200,3 +207,4 @@ while True:
     if not s: continue
     result = parser.parse(s)
     print(result)
+'''

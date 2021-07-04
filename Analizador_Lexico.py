@@ -180,10 +180,11 @@ def getTokens(lexer):
         print(tok)
 
 linea = " "
-
+'''
 while linea != "":
     linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
 print("Succesfull")
+'''
