@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from Analizador_Lexico import tokens
+import expresiones_semantico as semantico
 
 #AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 #REGLA PADRE
@@ -44,14 +45,13 @@ def p_variable(p):
 
 
 #EXPRESION
-def p_expresion_plus(p):
-    'expresion : expresion PLUS term'
-def p_expresion_minus(p):
-    'expresion : expresion MINUS term'
-def p_expresion_multiplication(p):
-    'expresion : expresion MULTIPLICATION term'
-def p_expresion_divide(p):
-    'expresion : expresion DIVIDE term'
+def p_expresion_aritmetic(p):
+    '''expresion : expresion PLUS term'\
+                | expresion MINUS term
+                | expresion MULTIPLICATION term
+                | expresion DIVIDE term'''
+    p[0] = semantico.ExpresionNumero(p[2], p[1], p[3])
+
 def p_expresion_exponent(p):
     'expresion : expresion EXPONENT term'
 def p_expresion_module(p):
@@ -76,6 +76,8 @@ def p_expresion_term(p):
     'expresion : term'
 def p_term_number(p):
     'term : NUMBER'
+    p[0] = semantico.Number(p[1])
+
 def p_term_float(p):
     'term : FLOAT'
 def p_term_var(p):
