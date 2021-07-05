@@ -145,6 +145,7 @@ def p_estructuraCondicional(p):
 
 def p_estructuraif(p):
     'estructuraif : IF expresion cuerpo'
+    p[0] = str(p[1]) + " " + str(p[2])
 
 def p_estructuraelsif(p):
     'estructuraelseif : ELSIF expresion cuerpo'
@@ -169,7 +170,8 @@ def p_estructuraDoLoop(p):
 #Fin regla nueva Katiuska Marín
 def p_estructuraIterativa(p):
     '''estructuraIterativa : sentenciafor END
-                            | sentenciawhile END'''
+                            | sentenciawhile END
+                            | estructuraDoLoop'''
 
 def p_sentenciafor(p):
     'sentenciafor : FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo'
@@ -226,19 +228,29 @@ def evaluar(texto):
 
 # aqui finalizo marcos
 
+
 variables = []
-'''while True:
+estructuras = []
+
+
+while True:
     try:
         s = input('calc >> ')
 
         valores = s.split()
         for i in range(len(valores)):
             if( valores [ i ] == '=' ):
-                variables.append ( valores[ i - 1 ] )
+                variables.append( valores[ i - 1 ] )
+
+            if( i == 0 and valores [ 0 ] == 'if' and valores[-1] == 'end'):
+                #if ( )
+                print("Estructura condicional if")
+                estructuras.append(valores[i])
 
     except EOFError:
         break
     if not s: continue
     result = parser.parse(s)
     print(result)
-    print(variables)'''
+    print(variables)
+    print(estructuras)
