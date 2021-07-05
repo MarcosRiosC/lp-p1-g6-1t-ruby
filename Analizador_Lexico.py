@@ -3,7 +3,6 @@ import ply.lex as lex
 # AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 # Mapa de palabras reservadas
 reserved = {
-    'and' : 'AND',
     'begin' : 'BEGIN',
     'break' : 'BREAK',
     'case' : 'CASE',
@@ -21,7 +20,6 @@ reserved = {
     'in' : 'IN',
     'nil' : 'NIL',
     'not' : 'NOT',
-    'or' : 'OR',
     'puts' : 'PUTS',
     'rescue' : 'RESCUE',
     'retry' : 'RETRY',

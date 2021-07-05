@@ -1,6 +1,6 @@
 import ply.yacc as yacc
 from Analizador_Lexico import tokens
-import expresiones_semantico as semantico
+from Analizador_Lexico import reserved
 
 #AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 #REGLA PADRE
@@ -11,11 +11,13 @@ def p_sentencia(p):
                 | estructura
                 | print
                 '''
+    p[0] = p [1]
 
 
 #FUNCION
 def p_funcion(p):
     '''funcion : DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END'''
+    p [0] = 'def'
 def p_parametros(p):
     '''parametros : VARIABLE_LOCAL
             | VARIABLE_LOCAL COMMA parametros'''
@@ -32,58 +34,84 @@ def p_cuerpo(p):
 
 
 #DECLARACION
-def p_declaracion(p):
+def p_declaracion_equal(p):
     'declaracion : variable EQUAL expresion'
+    p[0] = p[1]
+
 def p_declaracion_gets(p):
     'declaracion : variable EQUAL GETS'
+    p[0] = str(p[1]) + p[2] + str(p[3])
+
 def p_variable(p):
     '''variable : VARIABLE_LOCAL
             | VARIABLE_INSTANCE
             | VARIABLE_CLASS
             | VARIABLE_GLOBAL
             | CONSTANT'''
+    p[0] = p[1]
+    #p[0] = reserved.get(p[0], 'VARIABLE_INSTANCE')
+    #p[0] = 'variable'
 
 
 #EXPRESION
-def p_expresion_aritmetic(p):
-    '''expresion : expresion PLUS term
-                | expresion MINUS term
-                | expresion MULTIPLICATION term
-                | expresion DIVIDE term'''
-    p[0] = semantico.ExpresionNumero(p[2], p[1], p[3])
-
+def p_expresion_plus(p):
+    'expresion : expresion PLUS term'
+    p[0] = p[1] + p[3]
+def p_expresion_minus(p):
+    'expresion : expresion MINUS term'
+    p[0] = p[1] - p[3]
+def p_expresion_multiplication(p):
+    'expresion : expresion MULTIPLICATION term'
+    p[0] = p[1] * p[3]
+def p_expresion_divide(p):
+    'expresion : expresion DIVIDE term'
+    p[0] = p[1] / p[3]
 def p_expresion_exponent(p):
     'expresion : expresion EXPONENT term'
+    p[0] = p[1] ** p[3]
 def p_expresion_module(p):
     'expresion : expresion MODULE term'
+    p[0] = p[1] % p[3]
 def p_expresion_and_logic(p):
     'expresion : expresion AND_LOGIC term'
+    p[0] = p[1] & p[3]
 def p_expresion_or_logic(p):
     'expresion : expresion OR_LOGIC term'
+    p[0] = p[1] | p[3]
 def p_expresion_equality(p):
     'expresion : expresion EQUALITY term'
+    p[0] = p[1] == p[3]
 def p_expresion_equality_of_case(p):
     'expresion : expresion EQUALITY_OF_CASE term'
+
 def p_expresion_greater_equal(p):
     'expresion : expresion GREATER_EQUAL term'
+    p[0] = p[1] >= p[3]
 def p_expresion_greater_than(p):
     'expresion : expresion GREATER_THAN term'
+    p[0] = p[1] > p[3]
 def p_expresion_smaller_than(p):
     'expresion : expresion SMALLER_THAN term'
+    p[0] = p[1] < p[3]
 def p_expresion_smaller_equal(p):
     'expresion : expresion SMALLER_EQUAL term'
+    p[0] = p[1] <= p[3]
 def p_expresion_term(p):
     'expresion : term'
+    p[0] = p[1]
 def p_term_number(p):
     'term : NUMBER'
-    p[0] = semantico.Number(p[1])
-
+    p[0] = int(p[1])
 def p_term_float(p):
     'term : FLOAT'
+    p[0] = float(p[1])
 def p_term_var(p):
     'term : variable'
+    p[0] = p[1]
+
 def p_term_expr(p):
     'term : L_PAREN expresion R_PAREN'
+    p[0] = p[2]
 
 
 #PRINT
@@ -198,13 +226,19 @@ def evaluar(texto):
 
 # aqui finalizo marcos
 
-'''
-while True:
+variables = []
+'''while True:
     try:
         s = input('calc >> ')
+
+        valores = s.split()
+        for i in range(len(valores)):
+            if( valores [ i ] == '=' ):
+                variables.append ( valores[ i - 1 ] )
+
     except EOFError:
         break
     if not s: continue
     result = parser.parse(s)
     print(result)
-'''
+    print(variables)'''
