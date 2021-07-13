@@ -1,18 +1,12 @@
 import ply.lex as lex
 
-# AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 # Mapa de palabras reservadas
 reserved = {
-    'begin' : 'BEGIN',
-    'break' : 'BREAK',
-    'case' : 'CASE',
-    'class' : 'CLASS',
     'def' : 'DEF',
     'do' : 'DO',
     'else' : 'ELSE',
     'elsif' : 'ELSIF',
     'end' : 'END',
-    'ensure' : 'ENSURE',
     'false' : 'FALSE',
     'true' : 'TRUE',
     'for' : 'FOR',
@@ -20,29 +14,33 @@ reserved = {
     'in' : 'IN',
     'nil' : 'NIL',
     'not' : 'NOT',
-    'puts' : 'PUTS',
-    'rescue' : 'RESCUE',
-    'retry' : 'RETRY',
     'return' : 'RETURN',
     'then' : 'THEN',
     'unless' : 'UNLESS',
     'until' : 'UNTIL',
     'when' : 'WHEN',
     'while' : 'WHILE',
-    'gets' : 'GETS',
+    'case' : 'CASE',
     'loop' : 'LOOP',
-    'do' : 'DO'
+    'break' : 'BREAK'
+}
+
+#Mapa de funciones
+funciones = {
+    'class': 'CLASS',
+    'gets' : 'GETS',
+    'puts': 'PUTS',
+    'to_i' : 'TO_I',
+    'to_f' : 'TO_F',
+    'to_s' : 'TO_S'
 }
 
 # Tupla de tokens
 tokens = (
     'AND_LOGIC',
-    'COINCIDENCE',
-    'COMPOSITION',
     'DIVIDE',
     'EQUAL',
     'EQUALITY',
-    'EQUALITY_OF_CASE',
     'EXPONENT',
     'GREATER_EQUAL',
     'GREATER_THAN',
@@ -52,7 +50,7 @@ tokens = (
     'MODULE',
     'MULTIPLICATION',
     'NEGATION',
-    'NUMBER',
+    'ENTERO',
     'OR_LOGIC',
     'PLUS',
     'R_SQUARE_BRACKET',
@@ -64,23 +62,21 @@ tokens = (
     'WRENCH_R',
     'COMMA',
     'DOUBLE_QUOTE',
-    'DOUBLE_POINT',
     'VARIABLE_LOCAL',
     'VARIABLE_INSTANCE',
     'VARIABLE_CLASS',
     'VARIABLE_GLOBAL',
     'CONSTANT',
     'STRING',
-    'FLOAT'
-) + tuple(reserved.values())
-# AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
+    'FLOAT',
+    'POINT',
+    'DOUBLE_POINT'
+) + tuple(reserved.values()) + tuple(funciones.values())
 
-# AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 # Regla de expresiones regulares para los tokens
 t_AND_LOGIC = r'&'
 t_DIVIDE = r'/'
 t_EQUALITY = r'=='
-t_EQUALITY_OF_CASE = r'==='
 t_EXPONENT = r'\*\*'
 t_GREATER_EQUAL = r'>='
 t_GREATER_THAN = r'>'
@@ -91,9 +87,6 @@ t_OR_LOGIC = r'\|'
 t_PLUS = r'\+'
 t_SMALLER_THAN = r'<'
 t_SMALLER_EQUAL = r'<='
-#################################################
-t_COINCIDENCE = r'=~'
-t_COMPOSITION = r'\|&'
 t_EQUAL = r'\='
 t_L_PAREN = r'\('
 t_L_SQUARE_BRACKET = r'\['
@@ -103,60 +96,95 @@ t_R_PAREN = r'\)'
 t_WRENCH_L = r'\{'
 t_WRENCH_R = r'\}'
 t_COMMA = r'\,'
+t_POINT = r'\.'
 t_DOUBLE_POINT = r'\.\.'
 t_ignore = ' \t'
 
 def t_float(t):
     r'[0-9]+\.[0-9]+'
-    t.type = reserved.get(t.value, 'FLOAT')
+    t.type = 'FLOAT'
     return t
 
-def t_NUMBER(t):
+def t_ENTERO(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
-# AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
-
-#AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
-# Expreciones que definen una variable
 def t_VARIABLE_LOCAL(t):
     r'[a-z_][a-zA-Z_]*\d*'
-    t.type = reserved.get(t.value, 'VARIABLE_LOCAL')
-    return t
+    if reserved.keys().__contains__(t.value):
+        t.type = reserved.get(t.value)
+        print('Palabra reservada')
+        return t
+    elif funciones.keys().__contains__(t.value):
+        t.type = funciones.get(t.value)
+        print('Función')
+        return t
+    else:
+        return t
 
 def t_VARIABLE_INSTANCE(t):
     r'@[a-z_][a-zA-Z_]+\d*'
-    t.type = reserved.get(t.value, 'VARIABLE_INSTANCE')
-    return t
+    if reserved.keys().__contains__(t.value[1:]):
+        t.type = reserved.get(t.value[1:])
+        print('Palabra reservada')
+        return t
+    elif funciones.keys().__contains__(t.value[1:]):
+        t.type = funciones.get(t.value[1:])
+        print('Función')
+        return t
+    else:
+        return t
 
 def t_VARIABLE_CLASS(t):
     r'@{2}[a-z_][a-zA-Z_]+\d*'
-    t.type = reserved.get(t.value, 'VARIABLE_CLASS')
-    return t
+    if reserved.keys().__contains__(t.value[2:]):
+        t.type = reserved.get(t.value[2:])
+        print('Palabra reservada')
+        return t
+    elif funciones.keys().__contains__(t.value[2:]):
+        t.type = funciones.get(t.value[2:])
+        print('Función')
+        return t
+    else:
+        return t
 
 def t_CONSTANT(t):
     r'[A-Z_]+'
-    t.type = reserved.get(t.value, 'CONSTANT')
-    return t
+    if reserved.keys().__contains__(t.value.swapcase()):
+        t.type = reserved.get(t.value.swapcase())
+        print('Palabra reservada')
+        return t
+    elif funciones.keys().__contains__(t.value.swapcase()):
+        t.type = funciones.get(t.value.swapcase())
+        print('Función')
+        return t
+    else:
+        return t
 
 def t_VARIABLE_GLOBAL(t):
     r'\$[a-z_][a-zA-Z_]+\d*'
-    t.type = reserved.get(t.value, 'VARIABLE_GLOBAL')
-    return t
+    if reserved.keys().__contains__(t.value[1:]):
+        t.type = reserved.get(t.value[1:])
+        print('Palabra reservada')
+        return t
+    elif funciones.keys().__contains__(t.value[1:]):
+        t.type = funciones.get(t.value[1:])
+        print('Función')
+        return t
+    else:
+        return t
 
 def t_COMMENT(t):
     r'\#.*'
     pass
 
 def t_STRING(t):
-    r'\"[a-zA-Z0-9\s]*\"$'
-    t.type = reserved.get(t.value, 'STRING')
+    r'\"[a-zA-Z0-9\s\.]*\"'
+    t.type = 'STRING'
     return t
-#AQUÍ TERMINA KATIUSKA MARÍN
 
-
-#DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
+#DE AQUÍ EN ADELANTE EMPIEZA EL COPY PASTE SALVAJE (CÓDIGO RECICLADO DE LA PRÁCTICA EN CLASES)
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
@@ -178,11 +206,10 @@ def getTokens(lexer):
         print(tok)
 
 linea = " "
-'''
-while linea != "":
+
+'''while linea != "":
     linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
-print("Succesfull")
-'''
+print("Succesfull")'''

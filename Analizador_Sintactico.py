@@ -1,13 +1,12 @@
 import ply.yacc as yacc
 from Analizador_Lexico import tokens
-from Analizador_Lexico import reserved
+import Funciones_Analizador_Semántico as semantico
 
-#AQUÍ EMPIEZA UNA PARTE DE MI TRABAJO - AARÓN REYES
 #REGLA PADRE
 def p_sentencia(p):
     '''sentencia : funcion
                 | declaracion
-                | expresion
+                | operacion
                 | estructura
                 | print
                 '''
@@ -17,26 +16,43 @@ def p_sentencia(p):
 #FUNCION
 def p_funcion(p):
     '''funcion : DEF VARIABLE_LOCAL L_PAREN parametros R_PAREN cuerpo END'''
-    p [0] = 'def'
+    p [0] = 'funcion'
+
 def p_parametros(p):
     '''parametros : VARIABLE_LOCAL
             | VARIABLE_LOCAL COMMA parametros'''
+
 def p_cuerpo(p):
     '''cuerpo : declaracion
             | declaracion cuerpo
             | print
             | print cuerpo
-            | expresion
-            | expresion cuerpo
             | estructura
             | estructura cuerpo
     '''
 
 
 #DECLARACION
-def p_declaracion_equal(p):
-    'declaracion : variable EQUAL expresion'
+variables_numeros = []
+variables_booleanas = []
+
+def p_declaracion_termino(p):
+    'declaracion : variable EQUAL termino'
     p[0] = p[1]
+    variables_numeros.append(p[0])
+    print('variable asignada')
+
+def p_declaracion_booleano(p):
+    'declaracion : variable EQUAL booleano'
+    p[0] = p[1]
+    variables_booleanas.append(p[0])
+    print('variable asignada')
+
+def p_declaracion_operacion(p):
+    'declaracion : variable EQUAL operacion'
+    p[0] = p[1]
+    variables_numeros.append(p[0])
+    print('variable asignada')
 
 def p_declaracion_gets(p):
     'declaracion : variable EQUAL GETS'
@@ -49,84 +65,124 @@ def p_variable(p):
             | VARIABLE_GLOBAL
             | CONSTANT'''
     p[0] = p[1]
-    #p[0] = reserved.get(p[0], 'VARIABLE_INSTANCE')
-    #p[0] = 'variable'
 
 
-#EXPRESION
-def p_expresion_plus(p):
-    'expresion : expresion PLUS term'
-    p[0] = p[1] + p[3]
-def p_expresion_minus(p):
-    'expresion : expresion MINUS term'
-    p[0] = p[1] - p[3]
-def p_expresion_multiplication(p):
-    'expresion : expresion MULTIPLICATION term'
-    p[0] = p[1] * p[3]
-def p_expresion_divide(p):
-    'expresion : expresion DIVIDE term'
-    p[0] = p[1] / p[3]
-def p_expresion_exponent(p):
-    'expresion : expresion EXPONENT term'
-    p[0] = p[1] ** p[3]
-def p_expresion_module(p):
-    'expresion : expresion MODULE term'
-    p[0] = p[1] % p[3]
-def p_expresion_and_logic(p):
-    'expresion : expresion AND_LOGIC term'
-    p[0] = p[1] & p[3]
-def p_expresion_or_logic(p):
-    'expresion : expresion OR_LOGIC term'
-    p[0] = p[1] | p[3]
-def p_expresion_equality(p):
-    'expresion : expresion EQUALITY term'
-    p[0] = p[1] == p[3]
-def p_expresion_equality_of_case(p):
-    'expresion : expresion EQUALITY_OF_CASE term'
+#REGLA SEMÁNTICA PARA OPERACIONES MATEMÁTICAS (INICIO)
 
-def p_expresion_greater_equal(p):
-    'expresion : expresion GREATER_EQUAL term'
-    p[0] = p[1] >= p[3]
-def p_expresion_greater_than(p):
-    'expresion : expresion GREATER_THAN term'
-    p[0] = p[1] > p[3]
-def p_expresion_smaller_than(p):
-    'expresion : expresion SMALLER_THAN term'
-    p[0] = p[1] < p[3]
-def p_expresion_smaller_equal(p):
-    'expresion : expresion SMALLER_EQUAL term'
-    p[0] = p[1] <= p[3]
-def p_expresion_term(p):
-    'expresion : term'
-    p[0] = p[1]
-def p_term_number(p):
-    'term : NUMBER'
+def p_operacion_plus(p):
+    'operacion : termino PLUS termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] + p[3]
+        print('suma entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'suma')
+
+def p_operacion_minus(p):
+    'operacion : termino MINUS termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] - p[3]
+        print('resta entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'resta')
+
+def p_operacion_multiplication(p):
+    'operacion : termino MULTIPLICATION termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] * p[3]
+        print('multiplicación entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'multiplicación')
+
+def p_operacion_divide(p):
+    'operacion : termino DIVIDE termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] / p[3]
+        print('división entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'división')
+
+def p_operacion_exponent(p):
+    'operacion : termino EXPONENT termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] ** p[3]
+        print('potencia entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'potencia')
+
+def p_operacion_module(p):
+    'operacion : termino MODULE termino'
+    if (type(p[1]) == type(p[3]) == int):
+        p[0] = p[1] % p[3]
+        print('módulo entre números')
+    else:
+        semantico.validar_variables(p, variables_numeros, 'módulo')
+
+def p_termino_entero(p):
+    'termino : ENTERO'
     p[0] = int(p[1])
-def p_term_float(p):
-    'term : FLOAT'
+
+def p_termino_float(p):
+    'termino : FLOAT'
     p[0] = float(p[1])
-def p_term_var(p):
-    'term : variable'
+
+def p_termino_var(p):
+    'termino : variable'
     p[0] = p[1]
 
-def p_term_expr(p):
-    'term : L_PAREN expresion R_PAREN'
+def p_termino_expr(p):
+    'termino : L_PAREN operacion R_PAREN'
     p[0] = p[2]
+
+def p_termino_operacion(p):
+    'termino : operacion'
+    p[0] = p[1]
+#REGLA SEMÁNTICA PARA OPERACIONES MATEMÁTICAS (FIN)
+
+
+def p_booleano_and_logic(p):
+    'booleano : booleano AND_LOGIC booleano'
+    p[0] = p[1] & p[3]
+
+def p_booleano_or_logic(p):
+    'booleano : booleano OR_LOGIC booleano'
+    p[0] = p[1] | p[3]
+
+def p_booleano_equality(p):
+    'booleano : termino EQUALITY termino'
+    p[0] = p[1] == p[3]
+
+def p_booleano_greater_equal(p):
+    'booleano : termino GREATER_EQUAL termino'
+    p[0] = p[1] >= p[3]
+
+def p_booleano_greater_than(p):
+    'booleano : termino GREATER_THAN termino'
+    p[0] = p[1] > p[3]
+
+def p_booleano_smaller_than(p):
+    'booleano : termino SMALLER_THAN termino'
+    p[0] = p[1] < p[3]
+
+def p_booleano_smaller_equal(p):
+    'booleano : termino SMALLER_EQUAL termino'
+    p[0] = p[1] <= p[3]
 
 
 #PRINT
-def p_print_exp(p):
-    'print : PUTS L_PAREN expresion R_PAREN'
+def p_print_operacion(p):
+    'print : PUTS L_PAREN operacion R_PAREN'
+
+def p_print_booleano(p):
+    'print : PUTS L_PAREN booleano R_PAREN'
+
 def p_print_var(p):
     'print : PUTS L_PAREN variable R_PAREN'
+
 def p_print_vac(p):
     'print : PUTS L_PAREN R_PAREN'
-##def p_print_str(p):
-##    'print : PUTS L_PAREN STRING R_PAREN'''
-#AQUÍ TERMINA UNA PARTE DE MI TRABAJO - AARÓN REYES
 
 
-#AQUÍ EMPIEZA TRABAJO - KATIUSKA MARÍN
+#ESTRUCTURAS DE CONTROL
 def p_print_str(p):
     '''print : PUTS STRING
             | PUTS L_PAREN STRING R_PAREN'''
@@ -144,42 +200,37 @@ def p_estructuraCondicional(p):
                              | estructuraSelectCase estructuraelse END'''
 
 def p_estructuraif(p):
-    'estructuraif : IF expresion cuerpo'
+    'estructuraif : IF booleano cuerpo'
 
 def p_estructuraelsif(p):
-    'estructuraelseif : ELSIF expresion cuerpo'
+    'estructuraelseif : ELSIF booleano cuerpo'
 
 def p_estructuraelse(p):
     'estructuraelse : ELSE cuerpo'
 
-#Regla Nueva para sprint 3 (estructuras de control) - Katiuska Marìn
 def p_estructuraSelectCase(p):
     'estructuraSelectCase : CASE variable cuerpoSelectCase estructuraelse END'
 
 def p_cuerpoSelectCase(p):
-    '''cuerpoSelectCase : WHEN term expresion
-                        | WHEN term expresion cuerpoSelectCase
-                        | WHEN term print
-                        | WHEN term print cuerpoSelectCase'''
+    '''cuerpoSelectCase : WHEN termino booleano
+                        | WHEN termino booleano cuerpoSelectCase
+                        | WHEN termino print
+                        | WHEN termino print cuerpoSelectCase'''
 
-def p_estructuraDoLoop(p):
-    '''estructuraDoLoop : LOOP DO expresion BREAK END
-                        | LOOP DO expresion print BREAK END'''
+#def p_estructuraDoLoop(p):
+    '''estructuraDoLoop : LOOP DO booleano BREAK END
+                        | LOOP DO booleano print BREAK END'''
 
-#Fin regla nueva Katiuska Marín
 def p_estructuraIterativa(p):
     '''estructuraIterativa : sentenciafor END
                             | sentenciawhile END'''
 
 def p_sentenciafor(p):
-    'sentenciafor : FOR variable IN L_PAREN NUMBER DOUBLE_POINT NUMBER R_PAREN cuerpo'
+    'sentenciafor : FOR variable IN L_PAREN ENTERO DOUBLE_POINT ENTERO R_PAREN cuerpo'
 
 def p_sentenciawhile(p):
-    'sentenciawhile : WHILE expresion cuerpo'
+    'sentenciawhile : WHILE booleano cuerpo'
 
-
-#AQUÍ TERMINA KATIUSKA MARÍN
-# marcos rios
 def p_estructuraDato(p):
     'estructuraDato : estructuraDatoArray'
 
@@ -187,15 +238,16 @@ def p_estructuraDatoArray(p):
     '''estructuraDatoArray : variable EQUAL L_SQUARE_BRACKET R_SQUARE_BRACKET
         | variable EQUAL L_SQUARE_BRACKET arrayContext R_SQUARE_BRACKET
     '''
+
 def p_arrayContext(p):
     '''arrayContext : variable
-        | NUMBER
+        | ENTERO
         | variable COMMA arrayContext
-        | NUMBER COMMA arrayContext
+        | ENTERO COMMA arrayContext
     '''
-# marcos rios fin
 
-#DE AQUÍ EN ADELANTE EL CÓDIGO FUE RECICLADO DE LA PRÁCTICA EN CLASES
+
+#DE AQUÍ EN ADELANTE EMPIEZA EL COPY PASTE SALVAJE (CÓDIGO RECICLADO DE LA PRÁCTICA EN CLASES)
 #EVALUADOR DE ERRORES
 def p_error(p):
     if p:
@@ -226,19 +278,13 @@ def evaluar(texto):
 
 # aqui finalizo marcos
 
-variables = []
-'''while True:
+variables_no_asignadas = []
+
+while True:
     try:
         s = input('calc >> ')
-
-        valores = s.split()
-        for i in range(len(valores)):
-            if( valores [ i ] == '=' ):
-                variables.append ( valores[ i - 1 ] )
 
     except EOFError:
         break
     if not s: continue
     result = parser.parse(s)
-    print(result)
-    print(variables)'''
