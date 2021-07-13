@@ -6,7 +6,6 @@ import Funciones_Analizador_Semántico as semantico
 def p_sentencia(p):
     '''sentencia : funcion
                 | declaracion
-                | operacion
                 | estructura
                 | print
                 '''
@@ -33,25 +32,30 @@ def p_cuerpo(p):
 
 
 #DECLARACION
-variables_numeros = []
-variables_booleanas = []
+variables_asignadas = []
 
 def p_declaracion_termino(p):
     'declaracion : variable EQUAL termino'
     p[0] = p[1]
-    variables_numeros.append(p[0])
+    variables_asignadas.append(p[0])
+    print('variable asignada')
+
+def p_declaracion_string(p):
+    'declaracion : variable EQUAL STRING'
+    p[0] = p[1]
+    variables_asignadas.append(p[0])
     print('variable asignada')
 
 def p_declaracion_booleano(p):
     'declaracion : variable EQUAL booleano'
     p[0] = p[1]
-    variables_booleanas.append(p[0])
+    variables_asignadas.append(p[0])
     print('variable asignada')
 
 def p_declaracion_operacion(p):
     'declaracion : variable EQUAL operacion'
     p[0] = p[1]
-    variables_numeros.append(p[0])
+    variables_asignadas.append(p[0])
     print('variable asignada')
 
 def p_declaracion_gets(p):
@@ -75,7 +79,7 @@ def p_operacion_plus(p):
         p[0] = p[1] + p[3]
         print('suma entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'suma')
+        semantico.validar_variables(p, variables_asignadas, 'suma')
 
 def p_operacion_minus(p):
     'operacion : termino MINUS termino'
@@ -83,7 +87,7 @@ def p_operacion_minus(p):
         p[0] = p[1] - p[3]
         print('resta entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'resta')
+        semantico.validar_variables(p, variables_asignadas, 'resta')
 
 def p_operacion_multiplication(p):
     'operacion : termino MULTIPLICATION termino'
@@ -91,7 +95,7 @@ def p_operacion_multiplication(p):
         p[0] = p[1] * p[3]
         print('multiplicación entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'multiplicación')
+        semantico.validar_variables(p, variables_asignadas, 'multiplicación')
 
 def p_operacion_divide(p):
     'operacion : termino DIVIDE termino'
@@ -99,7 +103,7 @@ def p_operacion_divide(p):
         p[0] = p[1] / p[3]
         print('división entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'división')
+        semantico.validar_variables(p, variables_asignadas, 'división')
 
 def p_operacion_exponent(p):
     'operacion : termino EXPONENT termino'
@@ -107,7 +111,7 @@ def p_operacion_exponent(p):
         p[0] = p[1] ** p[3]
         print('potencia entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'potencia')
+        semantico.validar_variables(p, variables_asignadas, 'potencia')
 
 def p_operacion_module(p):
     'operacion : termino MODULE termino'
@@ -115,7 +119,7 @@ def p_operacion_module(p):
         p[0] = p[1] % p[3]
         print('módulo entre números')
     else:
-        semantico.validar_variables(p, variables_numeros, 'módulo')
+        semantico.validar_variables(p, variables_asignadas, 'módulo')
 
 def p_termino_entero(p):
     'termino : ENTERO'

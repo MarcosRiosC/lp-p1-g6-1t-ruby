@@ -114,7 +114,7 @@ def t_VARIABLE_LOCAL(t):
     r'[a-z_][a-zA-Z_]*\d*'
     if reserved.keys().__contains__(t.value):
         t.type = reserved.get(t.value)
-        print('Palabra reservada')
+        print('Palabra reservada 15')
         return t
     elif funciones.keys().__contains__(t.value):
         t.type = funciones.get(t.value)
@@ -207,9 +207,11 @@ def getTokens(lexer):
 
 linea = " "
 
-'''while linea != "":
+'''
+while linea != "":
     linea = input(">>")
     lexer.input(linea)
     getTokens(lexer)
 # Tokenize
-print("Succesfull")'''
+print("Succesfull")
+'''

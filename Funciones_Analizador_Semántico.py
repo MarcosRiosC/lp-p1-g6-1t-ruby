@@ -4,17 +4,17 @@ def validar_variables(p, variables_asignadas, op):
         if((variables_asignadas.__contains__(p[1])) & variables_asignadas.__contains__(p[3])):
             print( '%s entre variables' % op )
         else:
-            print('variable no asignada 1')
+            print('ALERTA TIPO 1: variable no asignada')
     else:
         if (type(p[1]) == int):
             if (variables_asignadas.__contains__(p[3])):
-                print('%s entre una variable y un número 1' % op)
+                print('%s entre una número y una variable' % op)
             else:
-                print('variable no asignada 2')
+                print('ALERTA TIPO 2: variable no asignada')
         if (type(p[3]) == int):
             if(variables_asignadas.__contains__(p[1])):
-                print( '%s entre una variable y un número 2' % op)
+                print( '%s entre una variable y un número' % op)
             else:
-                print('variable no asignada 3')
+                print('ALERTA TIPO 3: variable no asignada')
 
 
