@@ -201,6 +201,7 @@ def p_estructuraCondicional(p):
 
 def p_estructuraif(p):
     'estructuraif : IF booleano cuerpo'
+    p[0] = str(p[1]) + " " + str(p[2])
 
 def p_estructuraelsif(p):
     'estructuraelseif : ELSIF booleano cuerpo'
@@ -217,13 +218,14 @@ def p_cuerpoSelectCase(p):
                         | WHEN termino print
                         | WHEN termino print cuerpoSelectCase'''
 
-#def p_estructuraDoLoop(p):
+def p_estructuraDoLoop(p):
     '''estructuraDoLoop : LOOP DO booleano BREAK END
                         | LOOP DO booleano print BREAK END'''
 
 def p_estructuraIterativa(p):
     '''estructuraIterativa : sentenciafor END
-                            | sentenciawhile END'''
+                            | sentenciawhile END
+                            | estructuraDoLoop'''
 
 def p_sentenciafor(p):
     'sentenciafor : FOR variable IN L_PAREN ENTERO DOUBLE_POINT ENTERO R_PAREN cuerpo'
@@ -278,7 +280,7 @@ def evaluar(texto):
 
 # aqui finalizo marcos
 
-variables_no_asignadas = []
+estructuras = []
 
 while True:
     try:
