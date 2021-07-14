@@ -32,39 +32,48 @@ def p_cuerpo(p):
 
 #DECLARACION
 variables_asignadas = []
+tipo_datos_asignados = []
 
 def p_declaracion_termino(p):
     'declaracion : variable EQUAL termino'
     p[0] = p[1]
-    variables_asignadas.append(p[0] + "")
+    variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(type(p[3]))
     print('variable asignada')
 
 def p_declaracion_string(p):
     'declaracion : variable EQUAL STRING'
     p[0] = p[1]
     variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(str)
     print('variable asignada')
 
 def p_declaracion_booleano(p):
     'declaracion : variable EQUAL booleano'
     p[0] = p[1]
     variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(bool)
     print('variable asignada')
 
 def p_declaracion_operacion(p):
     'declaracion : variable EQUAL operacion'
     p[0] = p[1]
     variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(type(p[3]))
     print('variable asignada')
 
 def p_declaracion_gets(p):
     'declaracion : variable EQUAL GETS'
     p[0] = str(p[1]) + p[2] + str(p[3])
+    variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(str)
+    print('variable asignada')
 
 def p_declaracion_metodo(p):
     'declaracion : variable EQUAL metodo'
     p[0] = p[1]
     variables_asignadas.append(p[0])
+    tipo_datos_asignados.append(type(p[3]))
     print('variable asignada')
 
 def p_variable(p):
@@ -207,7 +216,7 @@ def p_operacion_plus(p):
         p[0] = p[1] + p[3]
         print('suma entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'suma')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'suma')
 
 def p_operacion_minus(p):
     'operacion : termino MINUS termino'
@@ -215,7 +224,7 @@ def p_operacion_minus(p):
         p[0] = p[1] - p[3]
         print('resta entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'resta')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'resta')
 
 def p_operacion_multiplication(p):
     'operacion : termino MULTIPLICATION termino'
@@ -223,7 +232,7 @@ def p_operacion_multiplication(p):
         p[0] = p[1] * p[3]
         print('multiplicación entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'multiplicación')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'multiplicación')
 
 def p_operacion_divide(p):
     'operacion : termino DIVIDE termino'
@@ -231,7 +240,7 @@ def p_operacion_divide(p):
         p[0] = p[1] / p[3]
         print('división entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'división')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'división')
 
 def p_operacion_exponent(p):
     'operacion : termino EXPONENT termino'
@@ -239,7 +248,7 @@ def p_operacion_exponent(p):
         p[0] = p[1] ** p[3]
         print('potencia entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'potencia')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'potencia')
 
 def p_operacion_module(p):
     'operacion : termino MODULE termino'
@@ -247,7 +256,7 @@ def p_operacion_module(p):
         p[0] = p[1] % p[3]
         print('módulo entre números')
     else:
-        semantico.validar_variables(p, variables_asignadas, 'módulo')
+        semantico.validar_variables(p, variables_asignadas, tipo_datos_asignados, 'módulo')
 
 def p_termino_entero(p):
     'termino : ENTERO'
@@ -264,10 +273,6 @@ def p_termino_var(p):
 def p_termino_expr(p):
     'termino : L_PAREN operacion R_PAREN'
     p[0] = p[2]
-
-def p_termino_string(p):
-    'termino : STRING'
-    p[0] = p[1]
 
 def p_termino_operacion(p):
     'termino : operacion'
@@ -315,3 +320,5 @@ while True:
         break
     if not s: continue
     result = parser.parse(s)
+    print(variables_asignadas)
+    print(tipo_datos_asignados)
