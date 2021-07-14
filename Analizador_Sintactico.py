@@ -175,8 +175,12 @@ def p_estructuraDatoArray(p):
 def p_arrayContext(p):
     '''arrayContext : variable
         | ENTERO
+        | FLOAT
+        | STRING
         | variable COMMA arrayContext
         | ENTERO COMMA arrayContext
+        | FLOAT COMMA arrayContext
+        | STRING COMMA arrayContext
     '''
 
 

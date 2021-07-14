@@ -31,6 +31,13 @@ Estructura for
 for var in (0..9) puts (var) end
 ```
 
+Dato Array
+arrayVacio = []
+arrayEntero = [1,2,3,4,5]
+arrayFlotante = [85.12,90.50,100.00]
+arrayTexto = ["si","no"]
+
+
 ## Integrantes ✒️
 
 * **Katiuska Marín** - 
