@@ -290,6 +290,7 @@ def p_error(p):
         print("Syntax error at token", p.type)
         # Just discard the token and tell the parser it's okay.
         #return "Syntax error at token "+ p.type
+        raise TypeError("Syntax error at %r with type %s" % (p.value,p.type))
     else:
         print("Syntax error at EOF")
         #return "Syntax error at EOF"
@@ -315,7 +316,7 @@ def evaluar(texto):
 # aqui finalizo marcos
 
 estructuras = []
-
+'''
 while True:
     try:
         s = input('calc >> ')
@@ -326,3 +327,4 @@ while True:
     result = parser.parse(s)
     print(variables_asignadas)
     print(tipo_datos_asignados)
+'''

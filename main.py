@@ -25,8 +25,11 @@ class Main:
 
     def evaluar(self, txtEntrada: scrolledtext.ScrolledText, txtSalida: scrolledtext.ScrolledText):
         entrada = txtEntrada.get("1.0", END)
-        salida = analizer.evaluar(entrada)
         txtSalida.delete('0.0', END)
+        salida = ""
+
+        for linea in entrada.splitlines():
+            salida += analizer.evaluar(linea) + "\n"
 
         mensaje = 'Works...'
         if salida:
