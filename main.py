@@ -29,7 +29,11 @@ class Main:
         salida = ""
 
         for linea in entrada.splitlines():
-            salida += analizer.evaluar(linea) + "\n"
+            salida_min = analizer.evaluar(linea)
+            if(salida_min):
+                salida += str(salida_min) + "\n"
+            else:
+                salida += "Works..." + "\n"
 
         mensaje = 'Works...'
         if salida:
