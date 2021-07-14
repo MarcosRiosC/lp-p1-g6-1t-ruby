@@ -17,9 +17,9 @@ A continuación el programa mostrará que a qué tipo de dato pertenece cada tok
 
 Estructura if
 ```
-if number == 5 puts 'cinco' end
-if number == 6 puts 'seis' else puts 'no es' end
-if number == 8 puts 'ocho' elsif number == 9 puts 'nueve' end
+if number == 5 puts "cinco" end
+if number == 6 puts "seis" else puts "no es" end
+if number == 8 puts "ocho" elsif number == 9 puts "nueve" end
 ```
 Estructura while
 ```
